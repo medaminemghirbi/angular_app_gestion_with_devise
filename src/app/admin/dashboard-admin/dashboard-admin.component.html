@@ -1,0 +1,119 @@
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <app-sidebar-admin></app-sidebar-admin>
+
+    <div class="content">
+        <app-navbar-admin></app-navbar-admin>
+
+        <!-- Sale & Revenue Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-user fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Employees <br><br></p>
+                            <h6 class="mb-0"> {{dataArrayy.data[0]}} </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-line fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Requests In Progress</p>
+                            <h6 class="mb-0">{{dataArrayy.data[1]}} </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Requests Accepted </p>
+                            <h6 class="mb-0">{{dataArrayy.data[2]}} </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-area fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Requests Refused</p>
+                            <h6 class="mb-0">{{dataArrayy.data[3]}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Sale & Revenue End -->
+
+
+
+        <!-- Recent Sales Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-light text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Requests ( {{dataArray.length}} ) </h6>
+                    <form class="d-none d-md-flex ms-4">
+                        <input class="form-control border-0" type="search" placeholder="Search By Email .." name="email"
+                            [(ngModel)]="searchedKeyword">
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-dark">
+
+                                <th scope="col">Email </th>
+                                <th scope="col">Start date </th>
+                                <th scope="col">End date </th>
+                                <th scope="col">Days </th>
+
+                                <th scope="col">Remaining days </th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Motif</th>
+                                <th scope="col">Sending date </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let item of dataArray | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
+
+                                <td> {{item.user.email}} </td>
+                                <td>{{item.start_date}} </td>
+                                <td>{{item.end_date}} </td>
+
+                                <td> {{calculateDiff(item.end_date | date:'dd-MM-yyyy' , item.start_date |
+                                    date:'dd-MM-yyyy')}} days/months !! </td>
+
+                                <td> {{ jourRestant(item.end_date | date:'dd-MM-yyyy' , item.start_date |
+                                    date:'dd-MM-yyyy') }} days/months !! </td>
+
+                                <td *ngIf="item.status == 0"><button type="button"
+                                        class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
+                                <td *ngIf="item.status == 1"><button type="button"
+                                        class="btn btn-success rounded-pill m-2">Accepted</button></td>
+                                <td *ngIf="item.status == 2"><button type="button"
+                                        class="btn btn-danger rounded-pill m-2">Refused</button></td>
+
+                                <td>{{item.motif}} </td>
+                                <td>{{item.created_at | date:'dd-MM-yyyy' }} </td>
+
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Recent Sales End -->
+        <div class="has-text-centered" style="margin-left: 75%;">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+        <br>
+    </div>
+</div>

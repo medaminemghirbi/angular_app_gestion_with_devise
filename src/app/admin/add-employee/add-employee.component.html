@@ -1,0 +1,58 @@
+
+
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <app-sidebar-admin></app-sidebar-admin>
+
+    <div class="content">
+        <app-navbar-admin></app-navbar-admin>
+
+        <!-- Form Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+
+                <div class="col-xl-4">
+                    <!-- Profile picture card-->
+                    <div class="card mb-4 mb-xl-0">
+                        <div class="card-header">Profile Picture</div>
+                        <div class="card-body text-center">
+                            <!-- Profile picture image-->
+                            <img class="img-account-profile rounded-circle mb-2"
+                                src="assets/img/default.jpeg" alt="">
+                            <!-- Profile picture help block-->
+                            
+                            <!-- Profile picture upload button-->
+                          
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4"> Add Employee </h6>
+                        <form   #f="ngForm" (ngSubmit)="register(f)" >
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" name="email"  ngModel #email="ngModel" required >
+                               
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" name="password"
+                                ngModel #password="ngModel" required 
+                                class="form-control" id="exampleInputPassword1">
+                            </div>
+                            <div class="alert alert-danger" *ngIf="messageError">{{messageError}}</div>
+                            <br>
+                         
+                            <button style="margin-left:87%;" type="submit" class="btn btn-primary"> Add </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Form End -->
+
+    </div>
+</div>

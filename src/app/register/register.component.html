@@ -1,0 +1,25 @@
+
+
+
+<div class="main">
+    <p class="sign" align="center">Sign up </p>
+    <form  #f="ngForm" (ngSubmit)="register(f)"  class="form1">
+
+        <input class="un " type="text" align="center" name="email"  ngModel #email="ngModel" required 
+            placeholder="name@example.com">
+
+        <input class="pass" type="password" align="center"  name="password"
+        ngModel #password="ngModel" required  placeholder="Password">
+
+            <div class="alert alert-danger" *ngIf="messageError">
+                {{messageError}}
+            </div>
+            
+        <a class="submit" align="center" > Sign up </a>
+
+        <p class="forgot" align="center"><a routerLink="/rese-password">Forgot Password?</a></p>
+
+        <p class="forgot" align="center"><a routerLink="/">Sign in </a></p>
+
+    </form>
+</div>
