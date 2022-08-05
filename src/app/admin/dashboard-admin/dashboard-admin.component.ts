@@ -17,13 +17,17 @@ export class DashboardAdminComponent implements OnInit {
   dataArray: any;
   messageErr: any;
   searchedKeyword: any;
-  p: any;
+  p: any ;
 
   dataArrayy: any;
+  admindata: any;
 
 
   constructor(private demandesServicesService: DemandesServicesService, private usersServicesService: UsersServicesService, private router: Router) {
 
+    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
+    console.log(this.admindata)
+    
     this.usersServicesService.countAllForAdmin().subscribe(result => {
 
       this.dataArrayy = result

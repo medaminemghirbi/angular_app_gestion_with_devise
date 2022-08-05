@@ -10,24 +10,32 @@ import { DashboardEmployeeComponent } from './employee/dashboard-employee/dashbo
 import { UpdateProfileComponent } from './employee/update-profile/update-profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuardGuard } from './guard/auth-guard.guard';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { EmployeeListRequestsComponent } from './employee/employee-list-requests/employee-list-requests.component';
 
 const routes: Routes = [
 
   { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
+  {path:'forgot-password',component:ForgotPasswordComponent},
+  {path:'reset-password/:token', component: ResetPasswordComponent},
+
   /************************* ADMIN ******************************/
-  { path: 'dashboard-admin', component: DashboardAdminComponent },
-  { path: 'add-employee', component: AddEmployeeComponent },
-  { path: 'list-demandes', component: ListDemandesComponent },
-  { path: 'list-employees', component: ListEmployeesComponent },
+  { path: 'dashboard-admin' , canActivate:[AuthGuardGuard] ,  component: DashboardAdminComponent },
+  { path: 'add-employee',  canActivate:[AuthGuardGuard] , component: AddEmployeeComponent },
+  { path: 'list-requests',  canActivate:[AuthGuardGuard] , component: ListDemandesComponent },
+  { path: 'list-employees', canActivate:[AuthGuardGuard] ,  component: ListEmployeesComponent },
   
 
   /************************* EMPLOYEE ******************************/
-  { path: 'dashboard-employee', component: DashboardEmployeeComponent },
-  { path: 'add-demande', component: AddDemandeComponent },
-  { path: 'update-profile', component: UpdateProfileComponent },
-  { path: 'calendar', component: CalendarComponent },
+  { path: 'dashboard-employee', canActivate:[AuthGuardGuard] , component: DashboardEmployeeComponent },
+  { path: 'add-request',  canActivate:[AuthGuardGuard] , component: AddDemandeComponent },
+  { path: 'employee-list-requests',  canActivate:[AuthGuardGuard] , component: EmployeeListRequestsComponent },
+  { path: 'update-profile',  canActivate:[AuthGuardGuard] , component: UpdateProfileComponent },
+  { path: 'calendar', canActivate:[AuthGuardGuard] ,  component: CalendarComponent },
 
 ];
 

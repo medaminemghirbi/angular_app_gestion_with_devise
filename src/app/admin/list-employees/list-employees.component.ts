@@ -26,10 +26,14 @@ export class ListEmployeesComponent {
   route: any;
   submitted: boolean = false;
   messageError: any;
+  admindata: any;
 
 
   constructor(private employeesServicesService: UsersServicesService, private router: Router) {
 
+    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
+    console.log(this.admindata)
+    
     this.employeesServicesService.getAllEmployees().subscribe(data => {
       // debugger
       console.log(data)

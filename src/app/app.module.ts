@@ -25,6 +25,10 @@ import { ListEmployeesComponent } from './admin/list-employees/list-employees.co
 import {ButtonsModule, CardsModule, ChartsModule,  MDBBootstrapModule, TableModule } from 'angular-bootstrap-md';
 import { CalendarComponent } from './employee/calendar/calendar.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SidebarComponent } from './employee/sidebar/sidebar.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { EmployeeListRequestsComponent } from './employee/employee-list-requests/employee-list-requests.component';
+
 
 
 @NgModule({
@@ -42,7 +46,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     RegisterComponent,
     ListEmployeesComponent,
     CalendarComponent,
-    ResetPasswordComponent ,
+    ResetPasswordComponent,
+    SidebarComponent,
+    ForgotPasswordComponent,
+    EmployeeListRequestsComponent ,
     
 
   ],
@@ -59,6 +66,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
     ChartsModule ,
     
+ 
 
 
   ],

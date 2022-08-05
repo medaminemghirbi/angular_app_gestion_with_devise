@@ -6,16 +6,17 @@ import { DemandesServicesService } from 'src/app/services/demandes-services.serv
 import { UsersServicesService } from 'src/app/services/users-services.service';
 
 @Component({
-  selector: 'app-dashboard-employee',
-  templateUrl: './dashboard-employee.component.html',
-  styleUrls: ['./dashboard-employee.component.css']
+  selector: 'app-employee-list-requests',
+  templateUrl: './employee-list-requests.component.html',
+  styleUrls: ['./employee-list-requests.component.css']
 })
-export class DashboardEmployeeComponent implements OnInit {
+export class EmployeeListRequestsComponent implements OnInit {
+
   dataArrayy: any;
   messageErr: any;
   dataArray: any;
   searchedKeyword: any;
-  p : any ;
+  p: any;
   employeedata: any;
 
   constructor(private demandesServicesService: DemandesServicesService, private usersServicesService: UsersServicesService, private router: Router) {
@@ -23,6 +24,7 @@ export class DashboardEmployeeComponent implements OnInit {
     this.employeedata = JSON.parse(sessionStorage.getItem('employeedata')!);
     console.log(this.employeedata.id)
     
+
     this.usersServicesService.countAllForAdmin().subscribe(result => {
 
       this.dataArrayy = result
@@ -42,7 +44,7 @@ export class DashboardEmployeeComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.demandesServicesService.getAllDemandes().subscribe(data => {
+    this.demandesServicesService.getRequestsByID(this.employeedata.id).subscribe(data => {
       // debugger
       console.log(data)
       this.dataArray = data
@@ -89,6 +91,5 @@ export class DashboardEmployeeComponent implements OnInit {
     var total = 20 - days
     return total;
   }
-
 
 }

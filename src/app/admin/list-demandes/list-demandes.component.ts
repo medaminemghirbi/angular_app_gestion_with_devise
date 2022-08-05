@@ -23,9 +23,13 @@ export class ListDemandesComponent implements OnInit {
   route: any;
   messageError: any;
   updatedemandes: FormGroup;
+  admindata: any;
 
   constructor(private demandesServicesService:DemandesServicesService,private router:Router) {
 
+    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
+    console.log(this.admindata)
+    
     this.demandesServicesService.getAllDemandes().subscribe(data=>{
       // debugger
       console.log(data) 

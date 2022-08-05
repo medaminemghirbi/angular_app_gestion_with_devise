@@ -22,7 +22,7 @@ export class AddEmployeeComponent implements OnInit {
     let data = f.value
     console.log(data)
     if (data.email.length !== 0 || data.password.length !== 0) {
-      this.usersServicesService.register(data).subscribe(data => {
+      this.usersServicesService.registerEmployee(data).subscribe(data => {
         Swal.fire('Whooa !', 'Account succeffully created , Acctivate Email to acced account profil !', 'success')
         // this.router.navigate(['/login'])
         // this.messageError = "Employee successfully added !"
