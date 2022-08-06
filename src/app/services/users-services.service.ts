@@ -24,20 +24,20 @@ export class UsersServicesService {
 
   resetPassword(token: any, email: any): Observable<any> {
     this.connecte = true;
-    return this.http.put(environment.urlBackend + 'users/password' + token , email);
+    return this.http.put(environment.urlBackend + 'users/password' + token, email);
   }
 
   sendResetLink(email: any) {
     return this.http.post(environment.urlBackend + 'users/password', email);
   }
 
-  
+
   updateimageuser(id: any, data: any): Observable<any> {
-    return this.http.patch(environment.urlBackend + 'updateimguser/' + id , data);
+    return this.http.patch(environment.urlBackend + 'updateimguser/' + id, data);
   }
 
   updateinfouser(id: any, data: any): Observable<any> {
-    return this.http.patch(environment.urlBackend + 'updateuser/' + id , data);
+    return this.http.patch(environment.urlBackend + 'updateuser/' + id, data);
   }
 
 
@@ -48,7 +48,7 @@ export class UsersServicesService {
 
   /************************************************FOR ADMIN ******************************************************/
   registerEmployee(data: any): Observable<any> {
-    return this.http.post(environment.urlBackend + 'admin/', data)
+    return this.http.post(environment.urlBackend + 'createEmployee/', data)
   }
 
   getAllEmployees() {
@@ -56,7 +56,7 @@ export class UsersServicesService {
   }
 
   updateEmployee(id: any, newprofile: any) {
-    return this.http.patch(environment.urlBackend + 'employees/' + id, newprofile)
+    return this.http.patch(environment.urlBackend + 'updateuser/' + id, newprofile)
   }
 
   deleteEmployee(id: any) {

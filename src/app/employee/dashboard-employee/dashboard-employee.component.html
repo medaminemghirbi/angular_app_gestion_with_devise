@@ -3,73 +3,118 @@
 
     <div class="content">
 
-        <br><br>
-        <form class="d-none d-md-flex ms-4">
-            <input class="form-control border-0" type="search" placeholder="Search By Status .." name="email"
-                [(ngModel)]="searchedKeyword">
-        </form>
-        <!-- Recent Sales Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="bg-light text-center rounded p-4">
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Requests ( {{dataArray.length}} ) </h6>
-
-                </div>
-                <div class="table-responsive">
-                    <table class="table text-start align-middle table-bordered table-hover mb-0">
-                        <thead>
-                            <tr class="text-dark">
-
-                                <th scope="col">Email </th>
-                                <th scope="col">Start date </th>
-                                <th scope="col">End date </th>
-                                <th scope="col">Days </th>
-
-                                <th scope="col">Remaining days </th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Motif For Accepted </th>
-                                <th scope="col">Motif Refused </th>
-                                <th scope="col">Sending date </th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                *ngFor="let item of dataArray | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
-
-                                <td> {{item.user.email}} </td>
-                                <td>{{item.start_date}} </td>
-                                <td>{{item.end_date}} </td>
-
-                                <td> {{calculateDiff(item.end_date | date:'dd-MM-yyyy' , item.start_date |
-                                    date:'dd-MM-yyyy')}} days/months !! </td>
-
-                                <td> {{ jourRestant(item.end_date | date:'dd-MM-yyyy' , item.start_date |
-                                    date:'dd-MM-yyyy') }} days/months !! </td>
-
-                                <td *ngIf="item.status == 0"><button type="button"
-                                        class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
-                                <td *ngIf="item.status == 1"><button type="button"
-                                        class="btn btn-success rounded-pill m-2">Accepted</button></td>
-                                <td *ngIf="item.status == 2"><button type="button"
-                                        class="btn btn-danger rounded-pill m-2">Refused</button></td>
-
-                                <td>{{item.motif_accepted}} </td>
-                                <td>{{item.motif_refused}} </td>
-                                <td>{{item.created_at | date:'dd-MM-yyyy' }} </td>
 
 
-                            </tr>
 
+        <div class="container">
+            <div class="view-account">
+                <section class="module">
+                    <div class="module-inner">
+                        <div class="side-bar">
+                            <div class="user-info">
+                                <img class="img-profile img-circle img-responsive center-block"
+                                    src="assets/img/logo.png" alt="">
+                                <ul class="meta list list-unstyled">
+                                    <li class="name"> {{employeedata.user.last_name}} {{employeedata.user.first_name}}
 
-                        </tbody>
-                    </table>
-                </div>
+                                    </li>
+                                    <li class="email"><a> {{employeedata.user.email}} </a></li>
+                                    <li class="activity"> <a>{{employeedata.user.phone}} </a></li>
+                                    <li class="activity"><a> {{employeedata.user.address}} </a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="content-panel">
+
+                            <div class="form-horizontal">
+                                <fieldset class="fieldset">
+
+                                    <div class="form-group avatar">
+
+                                        <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
+
+                                            <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                                                <img class="img-rounded img-responsive"
+                                                    [src]="employeedata.user_image_url" alt="">
+                                            </figure>
+                                            <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                                                <input type="file" (change)="fileChange($event)" name="avatar" [defaultValue]=""
+                                                    formControlName="avatar" class="file-uploader pull-left">
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-default-alt pull-left">Update
+                                                    Image</button>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    &nbsp; &nbsp;
+                                    <h2 class="title">Profile Details </h2>
+
+                                    <form [formGroup]="upadate" #f="ngForm" (ngSubmit)="updateinfouser(f)">
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control" formControlName="first_name"
+                                                    name="first_name" placeholder="firstname" [defaultValue]=""
+                                                    [(ngModel)]="employeedata.user.first_name" required ngModel>
+                                            </div>
+                                        </div> <br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control" formControlName="last_name"
+                                                    name="last_name" placeholder="lastname" [defaultValue]=""
+                                                    [(ngModel)]="employeedata.user.last_name" required ngModel>
+                                            </div>
+                                        </div> <br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Email </label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control"
+                                                    [defaultValue]="this.employeedata.user.email" [defaultValue]=""
+                                                    formControlName="email" name="email" placeholder="email"
+                                                    [(ngModel)]="employeedata.user.email" required ngModel>
+                                            </div>
+                                        </div><br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone </label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="number" min="0" class="form-control" class="form-control"
+                                                    name="phone" formControlName="phone" placeholder="phone" [defaultValue]=""
+                                                    oninput="validity.valid||(value='');"
+                                                    [(ngModel)]="employeedata.user.phone" required ngModel
+                                                    placeholder="+216">
+                                            </div>
+                                        </div> <br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Address </label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control" [defaultValue]=""
+                                                    formControlName="address" name="address" placeholder="address"
+                                                    [(ngModel)]="employeedata.user.address" required ngModel>
+                                            </div>
+                                        </div> <br>
+                                        <div class="form-group">
+                                            <div
+                                                class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
+                                                <input class="btn btn-primary" type="submit" value="Update Profile">
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </fieldset>
+
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </div>
-        <!-- Recent Sales End -->
-        <div class="has-text-centered" style="margin-left: 75%;">
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
 
         <br>

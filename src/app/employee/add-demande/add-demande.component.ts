@@ -37,12 +37,12 @@ export class AddDemandeComponent {
 
   addRequestt(f: any) {
     const formData = new FormData();
-   
+    formData.append('status', 'in_progress' );
     formData.append('start_date', this.addrequestt.value.start_date);
     formData.append('end_date', this.addrequestt.value.end_date);
     formData.append('motif_accepted', this.addrequestt.value.motif_accepted);
-    formData.append('motif_refused', this.addrequestt.value.motif_refused);
-    formData.append('user_id', this.employeedata.id);
+    formData.append('motif_refused', '');
+    formData.append('user_id', this.employeedata.user.id);
 
     let data = f.value
 

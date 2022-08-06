@@ -25,16 +25,16 @@ export class DemandesServicesService {
 
     /************************************************FOR ADMIN ******************************************************/
 
-  getAllDemandes(): Observable<any> {
+  getAllRequests(): Observable<any> {
     return this.http.get(environment.urlBackend + 'requests/')
   }
 
-  deleteDemande(id: any): Observable<any> {
+  deleteRequest (id: any): Observable<any> {
     return this.http.delete(environment.urlBackend + 'requests/' + id)
   }
 
-  updateDemande(id: any, data: any): Observable<any> {
-    return this.http.delete(environment.urlBackend + 'requests/' + id, data)
+  updateRequest (id: any, data: any): Observable<any> {
+    return this.http.patch(environment.urlBackend + 'requests/' + id, data)
   }
 
 

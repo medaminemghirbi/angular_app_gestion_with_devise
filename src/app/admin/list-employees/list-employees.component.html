@@ -15,6 +15,9 @@
                             [(ngModel)]="searchedKeyword">
                     </form>
                 </div>
+                <div align="left" >
+                    <button class="btn btn-outline-dark" routerLink="/add-employee"  > <i class="bi bi-plus"></i> Add Employee  </button>&nbsp;&nbsp;
+                   </div><br>
                 <div class="table-responsive">
                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                         <thead>
@@ -44,15 +47,12 @@
                                 <td>{{item.first_name}} </td>
                                 <td>{{item.address}} </td>
 
-
-
-
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#exampleModal1"
                                         class="btn btn-outline-info m-2">Solde </button>
                                 </td>
                                 <td> <button data-toggle="modal" data-target="#exampleModal" type="button"
-                                        (click)="getdata(item.email , item.last_name , item.first_name , item.address ,item.id)"
+                                        (click)="getdata(item.email , item.last_name , item.first_name , item.address , item.phone ,item.id)"
                                         class="btn btn-outline-warning m-2">Update</button>
                                 </td>
                                 <td>
@@ -102,7 +102,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Update</h5>
-                
+
             </div>
             <div class="modal-body">
                 <!-- form update start here -->
@@ -111,41 +111,41 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Email </label>
                         <input type="text" class="form-control" placeholder="email" [(ngModel)]="dataEmployee.email"
-                            required formControlName="email" ngModel minlength="2" />
+                            name="email" required formControlName="email" ngModel minlength="2" />
                     </div>
 
-                   
+
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Last name </label>
-                        <input type="text" class="form-control" placeholder="last name"
-                            [(ngModel)]="dataEmployee.last_name" required name="last_name" formControlName="last_name"
-                            minlength="2" maxlength="20" ngModel />
+                        <input type="text" class="form-control" placeholder="last name" name="last_name"
+                            [defaultValue]="" [(ngModel)]="dataEmployee.last_name" required name="last_name"
+                            formControlName="last_name" minlength="2" maxlength="20" ngModel />
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">First name </label>
-                        <input type="text" class="form-control" placeholder="first name"
-                            [(ngModel)]="dataEmployee.first_name" required name="first_name"
+                        <input type="text" class="form-control" placeholder="first name" name="first_name"
+                            [defaultValue]="" [(ngModel)]="dataEmployee.first_name" required name="first_name"
                             formControlName="first_name" minlength="2" maxlength="20" ngModel />
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1"> Address </label>
                         <input type="text" class="form-control" placeholder="address" [(ngModel)]="dataEmployee.address"
-                            required name="address" formControlName="address" minlength="2" maxlength="20" ngModel />
+                            name="address" [defaultValue]="" required name="address" formControlName="address"
+                            minlength="2" maxlength="20" ngModel />
                     </div>
-
-
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> Phone </label>
+                        <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control"
+                            placeholder="+216" [(ngModel)]="dataEmployee.phone" name="phone" [defaultValue]="" required
+                            name="phone" formControlName="phone" minlength="2" maxlength="20" ngModel />
+                    </div>
                     <br>
-
-
-
-
-                    <!-- lastName validation end here -->
 
                     <div class="alert alert-success" *ngIf="messageSuccess">
                         {{messageSuccess}}
                     </div>
 
-                    <button class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
 
                 <!-- form update end here -->

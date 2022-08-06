@@ -12,7 +12,7 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Requests ( {{dataArray.length}} ) </h6>
+                    <h6 class="mb-0">Requests ( {{this.dataArray.length}} ) </h6>
 
                 </div>
                 <div class="table-responsive">
@@ -29,7 +29,7 @@
                                 <th scope="col">Status</th>
                                 <th scope="col">Motif For Accepted </th>
                                 <th scope="col">Motif Refused </th>
-                                <th scope="col">Sending date </th>
+                                <th scope="col">Actions </th>
 
                             </tr>
                         </thead>
@@ -47,18 +47,25 @@
                                 <td> {{ jourRestant(item.end_date | date:'dd-MM-yyyy' , item.start_date |
                                     date:'dd-MM-yyyy') }} days/months !! </td>
 
-                                <td *ngIf="item.status == 0"><button type="button"
+                                <td *ngIf="item.status == 'in_progress' "><button type="button"
                                         class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
-                                <td *ngIf="item.status == 1"><button type="button"
+                                <td *ngIf="item.status == 'accepted' "><button type="button"
                                         class="btn btn-success rounded-pill m-2">Accepted</button></td>
-                                <td *ngIf="item.status == 2"><button type="button"
+                                <td *ngIf="item.status == 'refused' "><button type="button"
                                         class="btn btn-danger rounded-pill m-2">Refused</button></td>
 
                                 <td>{{item.motif_accepted}} </td>
                                 <td>{{item.motif_refused}} </td>
-                                <td>{{item.created_at | date:'dd-MM-yyyy' }} </td>
 
-
+                                <td>
+                                    <button (click)="delete(item.id , i)"
+                                        *ngIf="item.status==='in_progress' || item.status==='refused'   "
+                                        class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                                        Delete </button>
+                                    <button readonly style="cursor: not-allowed;" disabled (click)="delete(item.id , i)"
+                                        *ngIf="item.status==='accepted' " class="btn btn-outline-danger"><i
+                                            class="fa fa-trash" aria-hidden="true"></i> Delete </button>
+                                </td>
                             </tr>
 
 

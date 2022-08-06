@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './list-demandes.component.html',
   styleUrls: ['./list-demandes.component.css']
 })
-export class ListDemandesComponent implements OnInit {
+export class ListDemandesComponent {
 
   dataArray : any ;
   messageErr : any ;
@@ -22,7 +22,7 @@ export class ListDemandesComponent implements OnInit {
   submitted: boolean = false ;
   route: any;
   messageError: any;
-  updatedemandes: FormGroup;
+  updaterequests: FormGroup;
   admindata: any;
 
   constructor(private demandesServicesService:DemandesServicesService,private router:Router) {
@@ -30,7 +30,7 @@ export class ListDemandesComponent implements OnInit {
     this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
     console.log(this.admindata)
     
-    this.demandesServicesService.getAllDemandes().subscribe(data=>{
+    this.demandesServicesService.getAllRequests().subscribe(data=>{
       // debugger
       console.log(data) 
       this.dataArray=data 
@@ -38,27 +38,16 @@ export class ListDemandesComponent implements OnInit {
       this.messageErr="We dont't found this demande in our database"} 
     }) 
     
-    this.updatedemandes = new FormGroup({
-      email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      last_name: new FormControl('', [Validators.required]),
-      first_name: new FormControl('', [Validators.required]),
-      address: new FormControl('', [Validators.required]),
-
+    this.updaterequests = new FormGroup({
+      status: new FormControl('', [Validators.required]),
+      motif_refused: new FormControl('', [Validators.required]),
+      user_id: new FormControl('', [Validators.required]),
+      
     });
 
   }
 
-  ngOnInit(): void {
-    this.demandesServicesService.getAllDemandes().subscribe(data=>{
-      // debugger
-      console.log(data) 
-      this.dataArray=data 
-     , (err:HttpErrorResponse)=>{
-      this.messageErr="We dont't found this demande in our database"} 
-    }) 
- 
-  }
+  
 
   delete(id: any, i: number) {
     Swal.fire({
@@ -71,7 +60,7 @@ export class ListDemandesComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.demandesServicesService.deleteDemande(id).subscribe(response => {
+        this.demandesServicesService.deleteRequest(id).subscribe(response => {
           console.log(response)
           this.dataArray.splice(i, 1)
 
@@ -91,59 +80,66 @@ export class ListDemandesComponent implements OnInit {
 
   }
 
-  dataDemande = {
+  dataRequest = {
     id: '',
     status: '',
     start_date: '',
     end_date: '',
     user_id: '',
-    motif : ''
+    motif_accepted:'' ,
+    motif_refused : ''
 
   }
 
-  getdata(status: string,  start_date: string, end_date: string, motif: string, user_id :any , id: any) {
+  getdata(status: string,  start_date: string, end_date: string, motif_accepted: string , motif_refused:any, user_id :any , id: any) {
     this.messageSuccess = ''
-    this.dataDemande.status = status
-   // this.dataDemande.password = password
-    this.dataDemande.start_date = start_date
-    this.dataDemande.end_date = end_date
-    this.dataDemande.motif = motif
-    this.dataDemande.id = id
-    this.dataDemande.user_id = user_id
+    this.dataRequest.status = status
+   // this.dataRequest.password = password
+    this.dataRequest.start_date = start_date
+    this.dataRequest.end_date = end_date
+    this.dataRequest.motif_accepted = motif_accepted
+    this.dataRequest.motif_refused = motif_refused
+    this.dataRequest.id = id
+    this.dataRequest.user_id = user_id
 
-    console.log(this.dataDemande)
+    console.log(this.dataRequest)
 
   }
 
-  updatedemande(f: any) {
+  updaterequest(f: any) {
     let data = f.value
     const formData = new FormData();
-    formData.append('status', this.updateemployees.value.status);
-    // formData.append('password', this.updateemployees.value.password);
-    formData.append('start_date', this.updateemployees.value.start_date);
-    formData.append('end_date', this.updateemployees.value.end_date);
-    formData.append('motif', this.updateemployees.value.motif);
-    formData.append('user_id', this.updateemployees.value.user_id);
+    formData.append('status', this.updaterequests.value.status);
+    // formData.append('password', this.updaterequests.value.password);
+   // formData.append('start_date', this.updaterequests.value.start_date);
+   // formData.append('end_date', this.updaterequests.value.end_date);
 
-    this.usersService.updateEmployee(this.dataDemande.id, formData).subscribe((response: any) => {
+   // formData.append('motif_accepted', this.updaterequests.value.motif_accepted);
+    formData.append('motif_refused', this.updaterequests.value.motif_refused);
+    formData.append('user_id', this.updaterequests.value.user_id);
+
+    this.demandesServicesService.updateRequest(this.dataRequest.id, formData).subscribe((response: any) => {
 
 
       console.log(response)
       this.submitted = true;
-      let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataDemande.id)
+      let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
 
       this.dataArray[indexId].id = data.id
       this.dataArray[indexId].status = data.status
       //  this.dataArray[indexId].password = data.password
       this.dataArray[indexId].start_date = data.start_date
       this.dataArray[indexId].end_date = data.end_date
-      this.dataArray[indexId].motif = data.motif
+      this.dataArray[indexId].motif_accepted = data.motif_accepted
+
+      
+      this.dataArray[indexId].motif_refused = data.motif_refused
       this.dataArray[indexId].user_id = data.user_id
 
-      this.messageSuccess = `this title : ${this.dataArray[indexId].email} is updated`
-      Swal.fire('Whooa!', 'Employee Succeffully updated !', 'success')
-      //window.location.reload();
-      this.route.navigate(['/list-employees']);
+      this.messageSuccess = `this request id : ${this.dataArray[indexId].id} is updated`
+      Swal.fire('Whooa!', 'Request Succeffully updated !', 'success')
+     
+      window.location.reload();
 
 
     }, (err: HttpErrorResponse) => {

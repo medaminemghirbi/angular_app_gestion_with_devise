@@ -16,7 +16,7 @@
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4"> Add Request </h6>
-                        <form [formGroup]="addrequestt" #f="ngForm" (ngSubmit)="addRequestt (f); f.reset()" >
+                        <form [formGroup]="addrequestt" #f="ngForm" (ngSubmit)="addRequestt (f); f.reset()">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Start date </label>
                                 <input type="date" class="form-control" id="exampleInputEmail1"
@@ -36,25 +36,16 @@
                                 <select class="form-control" id="exampleFormControlSelect1"
                                     formControlName="motif_accepted" name="motif_accepted">
 
-                                    <option value="encours">Sickness </option>
-                                    <option value="accepted">Holiday </option>
-                                    <option value="refus">Accouchement </option>
+                                    <option value="Sickness">Sickness </option>
+                                    <option value="Holiday">Holiday </option>
+                                    <option value="Accouchement">Accouchement </option>
 
-                                    <option value="refus">Autres </option>
+                                    <option value="Autres">Autres </option>
 
                                 </select>
 
 
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Motif refus </label>
-                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                    formControlName="motif_refused" aria-describedby="emailHelp" name="motif_refused"
-                                    required>
-
-                            </div>
-
-
 
                             <div class="alert alert-danger" *ngIf="messageError">{{messageError}}</div>
                             <br>

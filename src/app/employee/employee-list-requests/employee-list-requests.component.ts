@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { DemandesServicesService } from 'src/app/services/demandes-services.service';
 import { UsersServicesService } from 'src/app/services/users-services.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-list-requests',
@@ -69,12 +70,12 @@ export class EmployeeListRequestsComponent implements OnInit {
     var dateF = new Date(dataF);
     var dateD = new Date(dataD);
 
-    console.log(dataF, dataD)
-    console.log(diffInDays)
+   // console.log(dataF, dataD)
+   // console.log(diffInDays)
 
     let days = Math.floor((dateF.getDay() - dateD.getDay()));
     var diff = 0 + days
-    console.log(diff)
+  //  console.log(diff)
     return diff.toString();
 
 
@@ -84,12 +85,43 @@ export class EmployeeListRequestsComponent implements OnInit {
     var dateF = new Date(dataF);
     var dateD = new Date(dataD);
 
-    console.log(dataF, dataD)
+   // console.log(dataF, dataD)
 
     let days = Math.floor((dateF.getDay() - dateD.getDay()));
 
     var total = 20 - days
     return total;
+  }
+
+  delete(id: any, i: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.demandesServicesService.deleteRequest(id).subscribe(response => {
+          console.log(response)
+          this.dataArray.splice(i, 1)
+
+
+        })
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        window.location.reload();
+
+
+      }
+    })
+
+
   }
 
 }
