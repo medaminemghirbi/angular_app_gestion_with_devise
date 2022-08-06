@@ -6,6 +6,9 @@ import { DemandesServicesService } from 'src/app/services/demandes-services.serv
 import { UsersServicesService } from 'src/app/services/users-services.service';
 import Swal from 'sweetalert2';
 
+import * as pdfMake from'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 @Component({
   selector: 'app-list-employees',
   templateUrl: './list-employees.component.html',

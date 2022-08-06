@@ -5,7 +5,7 @@
 
         <br><br>
         <form class="d-none d-md-flex ms-4">
-            <input class="form-control border-0" type="search" placeholder="Search By Status .." name="email"
+            <input class="form-control border-0" type="search" placeholder="Search ..." name="status"
                 [(ngModel)]="searchedKeyword">
         </form>
         <!-- Recent Sales Start -->
@@ -27,9 +27,9 @@
 
                                 <th scope="col">Remaining days </th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Motif For Accepted </th>
+                                <th scope="col">Reason </th>
                                 <th scope="col">Motif Refused </th>
-                                <th scope="col">Actions </th>
+                                <th colspan="2">Actions </th>
 
                             </tr>
                         </thead>
@@ -54,8 +54,19 @@
                                 <td *ngIf="item.status == 'refused' "><button type="button"
                                         class="btn btn-danger rounded-pill m-2">Refused</button></td>
 
-                                <td>{{item.motif_accepted}} </td>
+                                <td>{{item.reason}} </td>
                                 <td>{{item.motif_refused}} </td>
+
+                                <td>
+                                    <button *ngIf="item.status==='in_progress' || item.status==='refused'   "
+                                        (click)="getdata(item.start_date , item.end_date , item.reason  ,item.id)"
+                                        data-toggle="modal" data-target="#exampleModal"
+                                        class="btn btn-outline-warning"><i class="fa fa-edit" aria-hidden="true"></i>
+                                        Update </button>
+                                    <button readonly style="cursor: not-allowed;" disabled
+                                        *ngIf="item.status==='accepted' " class="btn btn-outline-danger"><i
+                                            class="fa fa-trash" aria-hidden="true"></i> Update </button>
+                                </td>
 
                                 <td>
                                     <button (click)="delete(item.id , i)"
@@ -66,8 +77,11 @@
                                         *ngIf="item.status==='accepted' " class="btn btn-outline-danger"><i
                                             class="fa fa-trash" aria-hidden="true"></i> Delete </button>
                                 </td>
-                            </tr>
 
+                            </tr>
+                            <tr *ngIf="dataArray.length==0">
+                                <td colspan="9" style="text-align:center;">no data found</td>
+                            </tr>
 
                         </tbody>
                     </table>
@@ -80,5 +94,61 @@
         </div>
 
         <br>
+    </div>
+</div>
+
+
+
+<!-- Modal Update -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+
+            </div>
+            <div class="modal-body">
+                <!-- form update start here -->
+                <form [formGroup]="updaterequest" #f="ngForm" (ngSubmit)="updaterequests(f)">
+                    <!-- firstName validation start here -->
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Start Date </label>
+                        <input type="date" class="form-control" placeholder="start_date"
+                            [(ngModel)]="dataRequest.start_date" name="start_date" required formControlName="start_date"
+                            ngModel minlength="2" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">End Date </label>
+                        <input type="date" class="form-control" placeholder="last name" name="end_date"
+                            [defaultValue]="" [(ngModel)]="dataRequest.end_date" required name="end_date"
+                            formControlName="end_date" minlength="2" maxlength="20" ngModel />
+                    </div>
+                    <div class="form-group">
+
+                        <label for="exampleFormControlInput1">Reason </label>
+                        <select class="form-control" id="exampleFormControlSelect1" formControlName="reason"
+                            name="reason" [(ngModel)]="dataRequest.reason"  >
+
+                            <option value="Sickness">Sickness </option>
+                            <option value="Holiday">Holiday </option>
+                            <option value="Accouchement">Accouchement </option>
+
+                            <option value="Autres">Autres </option>
+
+                        </select>
+                    </div>
+
+                    <br>
+
+                    <div class="alert alert-success" *ngIf="messageSuccess">
+                        {{messageSuccess}}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+
+                <!-- form update end here -->
+            </div>
+        </div>
     </div>
 </div>

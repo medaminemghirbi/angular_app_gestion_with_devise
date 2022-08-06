@@ -56,7 +56,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0"> Requests ( {{dataArray.length}} ) </h6>
                     <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search By Email .." name="email"
+                        <input class="form-control border-0" type="search" placeholder="Search ..." name="email"
                             [(ngModel)]="searchedKeyword">
                     </form>
                 </div>
@@ -72,7 +72,7 @@
 
                                 <th scope="col">Remaining days </th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Motif Accepted </th>
+                                <th scope="col">Reason </th>
 
 
 
@@ -99,14 +99,16 @@
                                 <td *ngIf="item.status == 'refused' "><button type="button"
                                         class="btn btn-danger rounded-pill m-2">Refused</button></td>
 
-                                <td>{{item.motif_accepted}} </td>
+                                <td>{{item.reason}} </td>
 
 
 
 
                             </tr>
 
-
+                            <tr *ngIf="dataArray.length==0">
+                                <td colspan="7" style="text-align:center;">no data found</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -11,7 +11,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Employees ( {{dataArray.length}} ) </h6>
                     <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search By Email .." name="email"
+                        <input class="form-control border-0" type="search" placeholder="Search ..." name="email"
                             [(ngModel)]="searchedKeyword">
                     </form>
                 </div>
@@ -61,7 +61,9 @@
                                 </td>
                             </tr>
 
-
+                            <tr *ngIf="dataArray.length==0">
+                                <td colspan="7" style="text-align:center;">no data found</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -111,6 +113,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Email </label>
                         <input type="text" class="form-control" placeholder="email" [(ngModel)]="dataEmployee.email"
+                        [defaultValue]=""
                             name="email" required formControlName="email" ngModel minlength="2" />
                     </div>
 

@@ -27,7 +27,7 @@ export class AddDemandeComponent {
       status: new FormControl('', [Validators.required]),
       start_date: new FormControl('', [Validators.required]),
       end_date: new FormControl('', [Validators.required]),
-      motif_accepted: new FormControl('', [Validators.required]),
+      reason: new FormControl('', [Validators.required]),
       motif_refused: new FormControl('', [Validators.required]),
       user_id: new FormControl('', [Validators.required])
 
@@ -40,7 +40,7 @@ export class AddDemandeComponent {
     formData.append('status', 'in_progress' );
     formData.append('start_date', this.addrequestt.value.start_date);
     formData.append('end_date', this.addrequestt.value.end_date);
-    formData.append('motif_accepted', this.addrequestt.value.motif_accepted);
+    formData.append('reason', this.addrequestt.value.reason);
     formData.append('motif_refused', '');
     formData.append('user_id', this.employeedata.user.id);
 
@@ -48,6 +48,9 @@ export class AddDemandeComponent {
 
     console.log(data)
     this.demandesServicesService.addRequest(formData).subscribe(() => {
+
+    //  this.date = moment(Date.now()).format("YYYY-MM-DD"); 
+      if (data.start_date < data.end_date ) {
 
       Swal.fire({
         icon: 'success',
@@ -59,8 +62,18 @@ export class AddDemandeComponent {
       })
       // window.location.reload();
       this.router.navigate(['/employee-list-requests'])
+    }
 
-
+    else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Start Date must be before End Date !' ,
+   
+          showConfirmButton: false,
+          timer: 1500
+      })  
+    }
     }, (err: HttpErrorResponse) => {
 
 

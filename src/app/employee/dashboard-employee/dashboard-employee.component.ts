@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   templateUrl: './dashboard-employee.component.html',
   styleUrls: ['./dashboard-employee.component.css']
 })
-export class DashboardEmployeeComponent  {
+export class DashboardEmployeeComponent {
 
   employeedata: any;
   imageupdate: FormGroup;
@@ -107,6 +107,7 @@ export class DashboardEmployeeComponent  {
 
           sessionStorage.setItem('employeedata', JSON.stringify(response));
           window.location.reload();
+        //  this.router.navigate(['/dashboard-employee'])
 
           console.log(response)
           let indexId = this.employeedata.findIndex((obj: any) => obj.id == this.employeedata.id)
@@ -133,6 +134,6 @@ export class DashboardEmployeeComponent  {
     })
 
   }
-  
+
 
 }

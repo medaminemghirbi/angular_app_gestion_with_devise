@@ -1,0 +1,101 @@
+
+
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <app-sidebar-admin></app-sidebar-admin>
+
+    <div class="content">
+        <app-navbar-admin></app-navbar-admin>
+
+
+
+
+
+<div>
+    <button class="btn btn-success" (click)="download()"> Download <i class="fas fa-download"></i> </button>
+</div>
+
+<div class="container"><br>
+    <div class="main-body">
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+
+                     
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card" *ngFor="let item of dataArrayy">
+                    <div class="card-body">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h4> Request Details : </h4>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Request status </h6>
+                                    </div>
+                                    <h6 class="col-sm-5">
+                                        {{item.status}}
+                                    </h6>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">start_date </h6>
+                                    </div>
+                                    <h6 class="col-sm-5">
+                                        {{item.start_date}}
+                                    </h6>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">end_date </h6>
+                                    </div>
+                                    <h6 class="col-sm-5">
+                                        {{item.end_date}} 
+                                    </h6>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">reason  </h6>
+                                    </div>
+                                    <h6 class="col-sm-5">
+                                        {{item.reason}}
+                                    </h6>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">motif_refused </h6>
+                                    </div>
+                                    <h6 class="col-sm-5">
+                                        {{item.motif_refused}} 
+                                    </h6>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br>
+</div>
+</div>

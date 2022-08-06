@@ -14,28 +14,35 @@ import { AuthGuardGuard } from './guard/auth-guard.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { EmployeeListRequestsComponent } from './employee/employee-list-requests/employee-list-requests.component';
+import { RequestsAcceptedComponent } from './admin/requests-accepted/requests-accepted.component';
+import { RequestsInprogressComponent } from './admin/requests-inprogress/requests-inprogress.component';
+import { RequestsRefusedComponent } from './admin/requests-refused/requests-refused.component';
+import { GenerateRequestComponent } from './admin/generate-request/generate-request.component';
 
 const routes: Routes = [
 
   { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
-  {path:'forgot-password',component:ForgotPasswordComponent},
-  {path:'reset-password/:token', component: ResetPasswordComponent},
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
 
   /************************* ADMIN ******************************/
-  { path: 'dashboard-admin' , canActivate:[AuthGuardGuard] ,  component: DashboardAdminComponent },
-  { path: 'add-employee',  canActivate:[AuthGuardGuard] , component: AddEmployeeComponent },
-  { path: 'list-requests',  canActivate:[AuthGuardGuard] , component: ListDemandesComponent },
-  { path: 'list-employees', canActivate:[AuthGuardGuard] ,  component: ListEmployeesComponent },
-  
+  { path: 'dashboard-admin', canActivate: [AuthGuardGuard], component: DashboardAdminComponent },
+  { path: 'add-employee', canActivate: [AuthGuardGuard], component: AddEmployeeComponent },
+  { path: 'list-requests', canActivate: [AuthGuardGuard], component: ListDemandesComponent },
+  { path: 'list-employees', canActivate: [AuthGuardGuard], component: ListEmployeesComponent },
+  { path: 'requests-accepted', canActivate: [AuthGuardGuard], component: RequestsAcceptedComponent },
+  { path: 'requests-inprogress', canActivate: [AuthGuardGuard], component: RequestsInprogressComponent },
+  { path: 'requests-refused', canActivate: [AuthGuardGuard], component: RequestsRefusedComponent },
+  { path: 'generaterequestemployee/:id', canActivate: [AuthGuardGuard], component: GenerateRequestComponent },
 
   /************************* EMPLOYEE ******************************/
-  { path: 'dashboard-employee', canActivate:[AuthGuardGuard] , component: DashboardEmployeeComponent },
-  { path: 'add-request',  canActivate:[AuthGuardGuard] , component: AddDemandeComponent },
-  { path: 'employee-list-requests',  canActivate:[AuthGuardGuard] , component: EmployeeListRequestsComponent },
-  { path: 'update-profile',  canActivate:[AuthGuardGuard] , component: UpdateProfileComponent },
-  { path: 'calendar', canActivate:[AuthGuardGuard] ,  component: CalendarComponent },
+  { path: 'dashboard-employee', canActivate: [AuthGuardGuard], component: DashboardEmployeeComponent },
+  { path: 'add-request', canActivate: [AuthGuardGuard], component: AddDemandeComponent },
+  { path: 'employee-list-requests', canActivate: [AuthGuardGuard], component: EmployeeListRequestsComponent },
+  { path: 'update-profile', canActivate: [AuthGuardGuard], component: UpdateProfileComponent },
+  { path: 'calendar', canActivate: [AuthGuardGuard], component: CalendarComponent },
 
 ];
 

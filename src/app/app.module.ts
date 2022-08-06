@@ -28,6 +28,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SidebarComponent } from './employee/sidebar/sidebar.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { EmployeeListRequestsComponent } from './employee/employee-list-requests/employee-list-requests.component';
+import { RequestsAcceptedComponent } from './admin/requests-accepted/requests-accepted.component';
+import { RequestsInprogressComponent } from './admin/requests-inprogress/requests-inprogress.component';
+import { RequestsRefusedComponent } from './admin/requests-refused/requests-refused.component';
+import { GenerateRequestComponent } from './admin/generate-request/generate-request.component';
 
 
 
@@ -49,7 +53,11 @@ import { EmployeeListRequestsComponent } from './employee/employee-list-requests
     ResetPasswordComponent,
     SidebarComponent,
     ForgotPasswordComponent,
-    EmployeeListRequestsComponent ,
+    EmployeeListRequestsComponent,
+    RequestsAcceptedComponent,
+    RequestsInprogressComponent,
+    RequestsRefusedComponent,
+    GenerateRequestComponent ,
     
 
   ],

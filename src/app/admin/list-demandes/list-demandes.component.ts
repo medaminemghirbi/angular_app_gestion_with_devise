@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { DemandesServicesService } from 'src/app/services/demandes-services.service';
 import Swal from 'sweetalert2';
 
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-list-demandes',
   templateUrl: './list-demandes.component.html',
@@ -12,42 +16,60 @@ import Swal from 'sweetalert2';
 })
 export class ListDemandesComponent {
 
-  dataArray : any ;
-  messageErr : any ;
-  searchedKeyword : any ;
-  p : any ;
-  messageSuccess: any ;
+  dataArray: any;
+  messageErr: any;
+  searchedKeyword: any;
+  p: any;
+  messageSuccess: any;
   updateemployees: any;
   usersService: any;
-  submitted: boolean = false ;
+  submitted: boolean = false;
   route: any;
   messageError: any;
   updaterequests: FormGroup;
   admindata: any;
+  docDefinition: any
+  requestdetails: any;
+  freelancerdata: any;
 
-  constructor(private demandesServicesService:DemandesServicesService,private router:Router) {
+  constructor(private demandesServicesService: DemandesServicesService, private router: Router) {
 
     this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
     console.log(this.admindata)
-    
-    this.demandesServicesService.getAllRequests().subscribe(data=>{
+
+    this.requestdetails = JSON.parse(sessionStorage.getItem('requestdetails')!);
+
+    /*
+    this.usersService.getrequestdata(this.freelancerdata.id).subscribe((data :any ) => {
+      console.log(data)
+      this.dataArray = data ,
+       (err: HttpErrorResponse) => {
+        console.log(err)
+        this.messageErr = "We dont't found this mission in our database"
+      }
+      //console.log(this.dataArray)
+    })
+*/
+
+    this.demandesServicesService.getAllRequests().subscribe(data => {
       // debugger
-      console.log(data) 
-      this.dataArray=data 
-     , (err:HttpErrorResponse)=>{
-      this.messageErr="We dont't found this demande in our database"} 
-    }) 
-    
+      sessionStorage.setItem('requestdetails', JSON.stringify(data));
+
+      console.log(data)
+      this.dataArray = data
+        , (err: HttpErrorResponse) => {
+          this.messageErr = "We dont't found this demande in our database"
+        }
+    })
+
     this.updaterequests = new FormGroup({
       status: new FormControl('', [Validators.required]),
       motif_refused: new FormControl('', [Validators.required]),
       user_id: new FormControl('', [Validators.required]),
-      
+
     });
 
   }
-
-  
 
   delete(id: any, i: number) {
     Swal.fire({
@@ -86,18 +108,18 @@ export class ListDemandesComponent {
     start_date: '',
     end_date: '',
     user_id: '',
-    motif_accepted:'' ,
-    motif_refused : ''
+    reason: '',
+    motif_refused: ''
 
   }
 
-  getdata(status: string,  start_date: string, end_date: string, motif_accepted: string , motif_refused:any, user_id :any , id: any) {
+  getdata(status: string, start_date: string, end_date: string, reason: string, motif_refused: any, user_id: any, id: any) {
     this.messageSuccess = ''
     this.dataRequest.status = status
-   // this.dataRequest.password = password
+    // this.dataRequest.password = password
     this.dataRequest.start_date = start_date
     this.dataRequest.end_date = end_date
-    this.dataRequest.motif_accepted = motif_accepted
+    this.dataRequest.reason = reason
     this.dataRequest.motif_refused = motif_refused
     this.dataRequest.id = id
     this.dataRequest.user_id = user_id
@@ -111,10 +133,10 @@ export class ListDemandesComponent {
     const formData = new FormData();
     formData.append('status', this.updaterequests.value.status);
     // formData.append('password', this.updaterequests.value.password);
-   // formData.append('start_date', this.updaterequests.value.start_date);
-   // formData.append('end_date', this.updaterequests.value.end_date);
+    // formData.append('start_date', this.updaterequests.value.start_date);
+    // formData.append('end_date', this.updaterequests.value.end_date);
 
-   // formData.append('motif_accepted', this.updaterequests.value.motif_accepted);
+    // formData.append('reason', this.updaterequests.value.reason);
     formData.append('motif_refused', this.updaterequests.value.motif_refused);
     formData.append('user_id', this.updaterequests.value.user_id);
 
@@ -130,15 +152,15 @@ export class ListDemandesComponent {
       //  this.dataArray[indexId].password = data.password
       this.dataArray[indexId].start_date = data.start_date
       this.dataArray[indexId].end_date = data.end_date
-      this.dataArray[indexId].motif_accepted = data.motif_accepted
+      this.dataArray[indexId].reason = data.reason
 
-      
+
       this.dataArray[indexId].motif_refused = data.motif_refused
       this.dataArray[indexId].user_id = data.user_id
 
       this.messageSuccess = `this request id : ${this.dataArray[indexId].id} is updated`
       Swal.fire('Whooa!', 'Request Succeffully updated !', 'success')
-     
+
       window.location.reload();
 
 
@@ -158,5 +180,81 @@ export class ListDemandesComponent {
 
 
   }
+
+  download() {
+    this.docDefinition = {
+      /*header: 'Resume',*/
+      content: [
+        {
+          text: `Date: ${new Date().toLocaleString()}`,
+          alignment: 'right'
+        },
+        {
+          text: `Bill No : ${((Math.random() * 1000).toFixed(0))}`,
+          alignment: 'right'
+        },
+        {
+          text: ' Request System',
+          decoration: 'underline',
+          fontSize: 20,
+          alignment: 'center',
+          color: '#047886'
+        },
+
+
+
+        {
+          text: 'Employee Details',
+          style: 'sectionHeader'
+        },
+
+
+
+        {
+          text: 'Request Details',
+          style: 'sectionHeader'
+        },
+        {
+          columns: [
+            [
+              {
+                text: "Request Status : " + this.requestdetails.map(function (a: any) { return a.status; }),
+                bold: true
+              },
+              { text: "start_date : " + this.requestdetails.map(function (a: any) { return a.start_date; }) },
+              { text: "end_date : " + this.requestdetails.map(function (a: any) { return a.end_date; }) },
+              { text: "reason : " + this.requestdetails.map(function (a: any) { return a.reason; }) },
+              { text: "motif_refused : " + this.requestdetails.map(function (a: any) { return a.motif_refused; }) }
+            ],
+            [
+
+            ]
+          ]
+        },
+        {
+          columns: [
+            [{ qr: "oumaima", fit: '50' }],
+            [{ text: 'Signature', alignment: 'right', italics: true }],
+          ]
+        },
+
+
+
+
+      ],
+
+      styles: {
+        sectionHeader: {
+          bold: true,
+          decoration: 'underline',
+          fontSize: 14,
+          margin: [0, 15, 0, 15]
+        }
+      }
+    };
+    pdfMake.createPdf(this.docDefinition).open();
+
+  }
+
 
 }
