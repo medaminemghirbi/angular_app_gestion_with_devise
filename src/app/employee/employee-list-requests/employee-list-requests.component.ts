@@ -26,11 +26,15 @@ export class EmployeeListRequestsComponent implements OnInit {
   messageError: any;
   messageSuccess: any;
   updaterequest: any;
-
+  requestdetails: any;
+  docDefinition : any ;
+  
   constructor(private demandesServicesService: DemandesServicesService, private usersServicesService: UsersServicesService, private router: Router) {
 
     this.employeedata = JSON.parse(sessionStorage.getItem('employeedata')!);
     console.log(this.employeedata.id)
+
+    this.requestdetails = JSON.parse(sessionStorage.getItem('requestdetails')!);
 
 
     this.usersServicesService.countAllForAdmin().subscribe(result => {
@@ -61,6 +65,8 @@ export class EmployeeListRequestsComponent implements OnInit {
   ngOnInit(): void {
     this.demandesServicesService.getRequestsByID(this.employeedata.id).subscribe(data => {
       // debugger
+      sessionStorage.setItem('requestdetails', JSON.stringify(data));
+
       console.log(data)
       this.dataArray = data
 
@@ -205,6 +211,81 @@ export class EmployeeListRequestsComponent implements OnInit {
     })
 
 
+
+  }
+
+  download() {
+    this.docDefinition = {
+      /*header: 'Resume',*/
+      content: [
+        {
+          text: `Date: ${new Date().toLocaleString()}`,
+          alignment: 'right'
+        },
+        {
+          text: `Bill No : ${((Math.random() * 1000).toFixed(0))}`,
+          alignment: 'right'
+        },
+        {
+          text: ' Request System',
+          decoration: 'underline',
+          fontSize: 20,
+          alignment: 'center',
+          color: '#047886'
+        },
+
+
+
+        {
+          text: 'Employee Details',
+          style: 'sectionHeader'
+        },
+
+
+
+        {
+          text: 'Request Details',
+          style: 'sectionHeader'
+        },
+        {
+          columns: [
+            [
+              {
+                text: "Request Status : " + this.requestdetails.map(function (a: any) { return a.status; }),
+                bold: true
+              },
+              { text: "start_date : " + this.requestdetails.map(function (a: any) { return a.start_date; }) },
+              { text: "end_date : " + this.requestdetails.map(function (a: any) { return a.end_date; }) },
+              { text: "reason : " + this.requestdetails.map(function (a: any) { return a.reason; }) },
+              { text: "motif_refused : " + this.requestdetails.map(function (a: any) { return a.motif_refused; }) }
+            ],
+            [
+
+            ]
+          ]
+        },
+        {
+          columns: [
+            [{ qr: "oumaima", fit: '50' }],
+            [{ text: 'Signature', alignment: 'right', italics: true }],
+          ]
+        },
+
+
+
+
+      ],
+
+      styles: {
+        sectionHeader: {
+          bold: true,
+          decoration: 'underline',
+          fontSize: 14,
+          margin: [0, 15, 0, 15]
+        }
+      }
+    };
+    pdfMake.createPdf(this.docDefinition).open();
 
   }
 

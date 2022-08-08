@@ -29,13 +29,14 @@
                                 <th scope="col">Status</th>
                                 <th scope="col">Reason </th>
                                 <th scope="col">Motif Refused </th>
-                                <th colspan="2">Actions </th>
+                                <th colspan="3">Actions </th>
 
                             </tr>
                         </thead>
                         <tbody>
                             <tr
                                 *ngFor="let item of dataArray | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
+
 
                                 <td> {{item.user.email}} </td>
                                 <td>{{item.start_date}} </td>
@@ -61,21 +62,29 @@
                                     <button *ngIf="item.status==='in_progress' || item.status==='refused'   "
                                         (click)="getdata(item.start_date , item.end_date , item.reason  ,item.id)"
                                         data-toggle="modal" data-target="#exampleModal"
-                                        class="btn btn-outline-warning"><i class="fa fa-edit" aria-hidden="true"></i>
-                                        Update </button>
+                                        class="btn btn-square btn-outline-warning"><i class="fa fa-edit" aria-hidden="true"></i>
+                                    </button>
                                     <button readonly style="cursor: not-allowed;" disabled
-                                        *ngIf="item.status==='accepted' " class="btn btn-outline-danger"><i
-                                            class="fa fa-trash" aria-hidden="true"></i> Update </button>
+                                        *ngIf="item.status==='accepted' " class="btn btn-square btn-outline-warning"><i
+                                            class="fa fa-edit" aria-hidden="true"></i> </button>
                                 </td>
 
                                 <td>
                                     <button (click)="delete(item.id , i)"
                                         *ngIf="item.status==='in_progress' || item.status==='refused'   "
-                                        class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i>
-                                        Delete </button>
+                                        class="btn btn-square btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
                                     <button readonly style="cursor: not-allowed;" disabled (click)="delete(item.id , i)"
-                                        *ngIf="item.status==='accepted' " class="btn btn-outline-danger"><i
-                                            class="fa fa-trash" aria-hidden="true"></i> Delete </button>
+                                        *ngIf="item.status==='accepted' " class="btn btn-square btn-outline-danger"><i
+                                            class="fa fa-trash" aria-hidden="true"></i> </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-square btn-outline-info m-2"
+                                        [routerLink]="['/generaterequestemployee',item.id]">
+
+                                        <i class="fa fa-download"></i></button>
+
+
                                 </td>
 
                             </tr>
@@ -127,7 +136,7 @@
 
                         <label for="exampleFormControlInput1">Reason </label>
                         <select class="form-control" id="exampleFormControlSelect1" formControlName="reason"
-                            name="reason" [(ngModel)]="dataRequest.reason"  >
+                            name="reason" [(ngModel)]="dataRequest.reason">
 
                             <option value="Sickness">Sickness </option>
                             <option value="Holiday">Holiday </option>

@@ -58,7 +58,7 @@ export class UpdateProfileComponent {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        this.employeesServicesService.updateimageuser(this.employeedata.id, imageformadata).subscribe(response => {
+        this.employeesServicesService.updateimageuser(this.employeedata.user.id, imageformadata).subscribe(response => {
 
 
           sessionStorage.setItem('employeedata', JSON.stringify(response));

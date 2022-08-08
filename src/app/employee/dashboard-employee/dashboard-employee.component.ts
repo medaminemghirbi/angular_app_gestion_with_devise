@@ -35,7 +35,7 @@ export class DashboardEmployeeComponent {
       phone: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
       //  avatar: new FormControl('', [Validators.required]),
-      //  password_confirmation: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required]),
     });
 
 
@@ -60,7 +60,7 @@ export class DashboardEmployeeComponent {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        this.employeesServicesService.updateimageuser(this.employeedata.id, imageformadata).subscribe(response => {
+        this.employeesServicesService.updateimageuser(this.employeedata.user.id, imageformadata).subscribe(response => {
 
 
           sessionStorage.setItem('employeedata', JSON.stringify(response));
@@ -91,7 +91,7 @@ export class DashboardEmployeeComponent {
     formData.append('email', this.upadate.value.email);
     formData.append('address', this.upadate.value.address);
     formData.append('phone', this.upadate.value.phone);
-
+    formData.append('password', this.upadate.value.password);
 
     // formData.append('password_confirmation', this.upadate.value.password_confirmation);
     Swal.fire({

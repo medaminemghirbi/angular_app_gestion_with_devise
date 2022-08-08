@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { DemandesServicesService } from 'src/app/services/demandes-services.service';
 import Swal from 'sweetalert2';
 
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-requests-inprogress',
   templateUrl: './requests-inprogress.component.html',
@@ -13,7 +17,7 @@ import Swal from 'sweetalert2';
 export class RequestsInprogressComponent {
 
   admindata: any;
-  requestdetails: any;
+ 
   dataArray: any;
   messageErr: any;
   updaterequests: FormGroup;
@@ -22,13 +26,14 @@ export class RequestsInprogressComponent {
   messageError: any;
   submitted: boolean = false;
   p : any ;
+  docDefinition: any ;
 
   constructor(private demandesServicesService:DemandesServicesService,private router:Router) {
 
     this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
     console.log(this.admindata)
     
-    this.requestdetails = JSON.parse( sessionStorage.getItem('requestdetails') !);
+   
     
     this.demandesServicesService.getrequestinprogressbyemployee().subscribe(data=>{
       // debugger
@@ -159,5 +164,6 @@ export class RequestsInprogressComponent {
 
 
   }
+
 
 }

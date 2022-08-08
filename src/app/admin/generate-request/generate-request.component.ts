@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DemandesServicesService } from 'src/app/services/demandes-services.service';
 import { UsersServicesService } from 'src/app/services/users-services.service';
 
-import * as pdfMake from'pdfmake/build/pdfmake.js';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -15,30 +15,36 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 })
 export class GenerateRequestComponent {
 
-  dataArrayy: any;
+  dataArray: any;
   messageErr: any;
   requestdetails: any;
-  docDefinition : any ;
+  docDefinition: any;
+  employeedata: any;
 
-  constructor(private demandesServicesService: DemandesServicesService, private usersServicesService: UsersServicesService, private router: Router , private activatedRoute: ActivatedRoute ) {
+  constructor(private demandesServicesService: DemandesServicesService, private router: Router, private activatedRoute: ActivatedRoute) {
 
-    this.requestdetails = JSON.parse( sessionStorage.getItem('requestdetails') !);
+    this.requestdetails = JSON.parse(sessionStorage.getItem('requestdetails')!);
 
-    this.demandesServicesService.getrequestdata(this.activatedRoute.snapshot.params['id']).subscribe((data : any )=>{
-      sessionStorage.setItem( 'requestdetails', JSON.stringify( data ) );
+    this.employeedata = JSON.parse(sessionStorage.getItem('employeedata')!);
+
+    this.demandesServicesService.getrequestdata(this.activatedRoute.snapshot.params['id']).subscribe((data: any) => {
+      sessionStorage.setItem('requestdetails', JSON.stringify(data));
+
       console.log(data)
-      this.dataArrayy = data ,
-       (err:HttpErrorResponse)=>{
-        console.log(err)
-      this.messageErr="We dont't found this user in our database"} 
-      //console.log(this.dataArray)
-    }) 
+      this.dataArray = data,
+
+        (err: HttpErrorResponse) => {
+          console.log(err)
+          this.messageErr = "We dont't found this request in our database"
+        }
+
+    })
 
   }
 
   download() {
     this.docDefinition = {
-      /*header: 'Resume',*/
+     
       content: [
         {
           text: `Date: ${new Date().toLocaleString()}`,
@@ -62,8 +68,22 @@ export class GenerateRequestComponent {
           text: 'Employee Details',
           style: 'sectionHeader'
         },
+        {
+          columns: [
+            [
+              {
+                text: "Full Name : " + this.employeedata.user.last_name + " " + this.employeedata.user.first_name,
+                bold: true
+              },
+              { text: "Employee Email : " + this.employeedata.user.email },
+              { text: "Phone Number : " + this.employeedata.user.phone },
+              { text: "Employee Address : " + this.employeedata.user.address }
+            ],
+            [
 
-
+            ]
+          ]
+        },
 
         {
           text: 'Request Details',
@@ -76,10 +96,10 @@ export class GenerateRequestComponent {
                 text: "Request Status : " + this.requestdetails.map(function (a: any) { return a.status; }),
                 bold: true
               },
-              { text: "start_date : " + this.requestdetails.map(function (a: any) { return a.start_date; }) },
-              { text: "end_date : " + this.requestdetails.map(function (a: any) { return a.end_date; }) },
-              { text: "reason : " + this.requestdetails.map(function (a: any) { return a.reason; }) },
-              { text: "motif_refused : " + this.requestdetails.map(function (a: any) { return a.motif_refused; }) }
+              { text: "Start_date : " + this.requestdetails.map(function (a: any) { return a.start_date; }) },
+              { text: "End_date : " + this.requestdetails.map(function (a: any) { return a.end_date; }) },
+              { text: "Reason : " + this.requestdetails.map(function (a: any) { return a.reason; }) },
+              { text: "Motif_refused : " + this.requestdetails.map(function (a: any) { return a.motif_refused; }) }
             ],
             [
 
@@ -88,7 +108,7 @@ export class GenerateRequestComponent {
         },
         {
           columns: [
-            [{ qr: "oumaima", fit: '50' }],
+            [{ qr: "oumaima", fit: '45' , alignment: 'right' }],
             [{ text: 'Signature', alignment: 'right', italics: true }],
           ]
         },

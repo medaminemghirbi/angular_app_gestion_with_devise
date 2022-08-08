@@ -19,7 +19,7 @@
                                     <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
                                         <div class="user-profile">
 
-                                            <img height="180" [src]="employeedata.user_image_url" alt=""
+                                            <img height="180"  [src]="employeedata.avv" alt=""
                                                 class="card-img-top" />
                                             <br />
                                             <input type="file" (change)="fileChange($event)" [defaultValue]=""

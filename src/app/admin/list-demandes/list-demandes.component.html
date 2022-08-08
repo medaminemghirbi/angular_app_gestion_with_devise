@@ -27,7 +27,7 @@
                                 <th scope="col">Reason </th>
                                 <th scope="col">Motif Refused </th>
                                 <th scope="col">Sending date </th>
-                                <th colspan="3">Actions</th>
+                                <th colspan="2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,18 +49,33 @@
                                 <td>{{item.motif_refused }} </td>
                                 <td>{{item.created_at | date:'medium' }} </td>
 
-                                <td> <button data-toggle="modal" data-target="#exampleModal" type="button"
+                                <td>
+                                    <button *ngIf="item.status==='in_progress' || item.status==='refused'   "
                                         (click)="getdata(item.status , item.start_date , item.end_date , item.reason, item.motif_refused , item.user.id ,item.id)"
-                                        class="btn btn-outline-warning m-2">Update</button>
+                                        data-toggle="modal" data-target="#exampleModal"
+                                        class="btn btn-square btn-outline-warning"><i class="fa fa-edit"
+                                            aria-hidden="true"></i>
+                                    </button>
+                                    <button readonly style="cursor: not-allowed;" disabled
+                                        *ngIf="item.status==='accepted' " class="btn btn-square btn-outline-warning"><i
+                                            class="fa fa-edit" aria-hidden="true"></i> </button>
                                 </td>
+
                                 <td>
-                                    <button (click)="delete(item.id , i)" type="button"
-                                        class="btn btn-outline-danger m-2">Delete</button>
+                                    <button (click)="delete(item.id , i)"
+                                        *ngIf="item.status==='in_progress' || item.status==='refused'   "
+                                        class="btn btn-square btn-outline-danger"><i class="fa fa-trash"
+                                            aria-hidden="true"></i>
+                                    </button>
+                                    <button readonly style="cursor: not-allowed;" disabled (click)="delete(item.id , i)"
+                                        *ngIf="item.status==='accepted' " class="btn btn-square btn-outline-danger"><i
+                                            class="fa fa-trash" aria-hidden="true"></i> </button>
                                 </td>
-                                <td>
-                                    <button [routerLink]="['/generaterequestemployee',item.id]" type="button"
-                                        class="btn btn-outline-info m-2">Generate_contrat </button>
-                                </td>
+
+
+
+
+                              
                             </tr>
                             <tr *ngIf="dataArray.length==0">
                                 <td colspan="8" style="text-align:center;">no data found</td>

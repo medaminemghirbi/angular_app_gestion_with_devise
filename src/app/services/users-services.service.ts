@@ -40,6 +40,11 @@ export class UsersServicesService {
     return this.http.patch(environment.urlBackend + 'updateuser/' + id, data);
   }
 
+  
+  logout (  ): Observable<any> {
+    return this.http.get(environment.urlBackend + 'users/sign_out/'   )
+  }
+
 
   /************************************************ ADMIN  **************************************************************/
   registerAdmin(data: any): Observable<any> {
@@ -65,6 +70,10 @@ export class UsersServicesService {
 
   countAllForAdmin(): Observable<any> {
     return this.http.get(environment.urlBackend + 'countall/')
+  }
+  
+  getemployeedata( id : any ): Observable<any> {
+    return this.http.get(environment.urlBackend + 'getemployeedata/'  +  id )
   }
 
 

@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { DemandesServicesService } from 'src/app/services/demandes-services.service';
 import Swal from 'sweetalert2';
 
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-requests-accepted',
   templateUrl: './requests-accepted.component.html',
@@ -12,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class RequestsAcceptedComponent  {
   admindata: any;
-  requestdetails: any;
+ 
   dataArray: any;
   messageErr: any;
   updaterequests: FormGroup;
@@ -21,13 +25,12 @@ export class RequestsAcceptedComponent  {
   messageError: any;
   submitted: boolean = false;
   p : any ;
+  docDefinition: any ;
 
   constructor(private demandesServicesService:DemandesServicesService,private router:Router) {
 
     this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
     console.log(this.admindata)
-    
-    this.requestdetails = JSON.parse( sessionStorage.getItem('requestdetails') !);
     
     this.demandesServicesService.getrequestacceptedbyemployee().subscribe(data=>{
       // debugger
@@ -159,4 +162,5 @@ export class RequestsAcceptedComponent  {
 
   }
   
+
 }

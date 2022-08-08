@@ -12,15 +12,12 @@
                     <div class="module-inner">
                         <div class="side-bar">
                             <div class="user-info">
-                                <img class="img-profile img-circle img-responsive center-block"
-                                    src="assets/img/logo.png" alt="">
+                                <img class="img-profile img-circle img-responsive center-block" [src]="employeedata.avv"
+                                    alt="">
                                 <ul class="meta list list-unstyled">
-                                    <li class="name"> {{employeedata.user.last_name}} {{employeedata.user.first_name}}
-
-                                    </li>
+                                   
                                     <li class="email"><a> {{employeedata.user.email}} </a></li>
-                                    <li class="activity"> <a>{{employeedata.user.phone}} </a></li>
-                                    <li class="activity"><a> {{employeedata.user.address}} </a></li>
+                                    
                                 </ul>
                             </div>
 
@@ -35,13 +32,11 @@
 
                                         <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
 
-                                            <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                                <img class="img-rounded img-responsive"
-                                                    [src]="employeedata.user_image_url" alt="">
-                                            </figure>
+
                                             <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                                                <input type="file" (change)="fileChange($event)" name="avatar" [defaultValue]=""
-                                                    formControlName="avatar" class="file-uploader pull-left">
+                                                <input type="file" (change)="fileChange($event)" name="avatar"
+                                                    [defaultValue]="" formControlName="avatar"
+                                                    class="file-uploader pull-left">
                                                 <button type="submit"
                                                     class="btn btn-sm btn-default-alt pull-left">Update
                                                     Image</button>
@@ -82,9 +77,9 @@
                                         <div class="form-group">
                                             <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone </label>
                                             <div class="col-md-10 col-sm-9 col-xs-12">
-                                                <input type="number" min="0" class="form-control" class="form-control"
-                                                    name="phone" formControlName="phone" placeholder="phone" [defaultValue]=""
-                                                    oninput="validity.valid||(value='');"
+                                                <input type="number"  class="form-control" class="form-control"
+                                                    name="phone" formControlName="phone" placeholder="phone"
+                                                    [defaultValue]=""
                                                     [(ngModel)]="employeedata.user.phone" required ngModel
                                                     placeholder="+216">
                                             </div>
@@ -98,7 +93,16 @@
                                             </div>
                                         </div> <br>
                                         <div class="form-group">
-                                            <div
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Password </label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="password" class="form-control" [defaultValue]=""
+                                                    formControlName="password" name="password" placeholder="password"
+                                                    [(ngModel)]="employeedata.user.password" required ngModel>
+                                            </div>
+                                        </div> <br>
+
+                                        <div class="form-group">
+                                            <div style="text-align: center;"
                                                 class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
                                                 <input class="btn btn-primary" type="submit" value="Update Profile">
                                             </div>
