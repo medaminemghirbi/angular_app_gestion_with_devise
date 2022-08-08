@@ -17,12 +17,16 @@ import { EmployeeListRequestsComponent } from './employee/employee-list-requests
 import { RequestsAcceptedComponent } from './admin/requests-accepted/requests-accepted.component';
 import { RequestsInprogressComponent } from './admin/requests-inprogress/requests-inprogress.component';
 import { RequestsRefusedComponent } from './admin/requests-refused/requests-refused.component';
-import { GenerateRequestComponent } from './admin/generate-request/generate-request.component';
+import { GenerateRequestComponent } from './employee/generate-request/generate-request.component';
+import { ContactComponent } from './contact/contact.component';
+
 
 const routes: Routes = [
 
   { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
+  { path: 'contact', component: ContactComponent },
 
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },

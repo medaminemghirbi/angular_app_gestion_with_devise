@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UsersServicesService } from '../services/users-services.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ export class AuthGuardGuard implements CanActivate {
   admindata: any = null
   employeedata: any = null
 
-  constructor(private authService: UsersServicesService, private router: Router) { }
+  constructor( private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -19,7 +18,7 @@ export class AuthGuardGuard implements CanActivate {
     this.admindata = sessionStorage.getItem('admindata');
     this.employeedata = sessionStorage.getItem('employeedata');
 
-    if (this.admindata != null || this.employeedata != null)
+    if ( this.admindata != null || this.employeedata != null )
       return true;
     else
       this.router.navigate(['/']);

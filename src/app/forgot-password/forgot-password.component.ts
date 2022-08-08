@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import Swal from 'sweetalert2';
 import { UsersServicesService } from '../services/users-services.service';
 
@@ -11,20 +10,20 @@ import { UsersServicesService } from '../services/users-services.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent {
   logo: any = "./assets/lg.png";
   resetemaillink!: FormGroup;
   messageSuccess = '';
   messageErr = ''
   constructor(private usersServicesService: UsersServicesService, private route: Router) {
+
     this.resetemaillink = new FormGroup({
       email: new FormControl('', [Validators.required])
-
     });
+
   }
 
-  ngOnInit(): void {
-  }
+
   sendresetlinkk(f: any) {
 
     const formData = new FormData();
@@ -32,7 +31,6 @@ export class ForgotPasswordComponent implements OnInit {
     let data = f.value
 
     this.usersServicesService.sendResetLink(formData).subscribe(() => {
-
 
       // console.log(formData)
 
@@ -46,4 +44,6 @@ export class ForgotPasswordComponent implements OnInit {
 
     });
   }
+
+
 }

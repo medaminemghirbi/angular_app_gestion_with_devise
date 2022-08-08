@@ -9,26 +9,21 @@ import { Observable } from 'rxjs';
 })
 export class UsersServicesService {
 
-  public connecte: boolean = false;
-  logged_in: boolean = false;
-
   constructor(private http: HttpClient, public router: Router) {
 
   }
 
   /************************************************ ADMIN + EMPLOYEE ***************************************************/
   login(data: any): Observable<any> {
-    this.connecte = true;
     return this.http.post(environment.urlBackend + 'users/sign_in/', data);
   }
 
   resetPassword(token: any, email: any): Observable<any> {
-    this.connecte = true;
-    return this.http.put(environment.urlBackend + 'users/password' + token, email);
+    return this.http.put(environment.urlBackend + 'password_resets/' + token, email);
   }
 
   sendResetLink(email: any) {
-    return this.http.post(environment.urlBackend + 'users/password', email);
+    return this.http.post(environment.urlBackend + 'password/forgot/', email);
   }
 
 

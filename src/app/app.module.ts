@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ListEmployeesComponent } from './admin/list-employees/list-employees.component';
 
-import {ButtonsModule, CardsModule, ChartsModule,  MDBBootstrapModule, TableModule } from 'angular-bootstrap-md';
+import { ButtonsModule, CardsModule, ChartsModule, MDBBootstrapModule, TableModule } from 'angular-bootstrap-md';
 import { CalendarComponent } from './employee/calendar/calendar.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SidebarComponent } from './employee/sidebar/sidebar.component';
@@ -31,8 +31,8 @@ import { EmployeeListRequestsComponent } from './employee/employee-list-requests
 import { RequestsAcceptedComponent } from './admin/requests-accepted/requests-accepted.component';
 import { RequestsInprogressComponent } from './admin/requests-inprogress/requests-inprogress.component';
 import { RequestsRefusedComponent } from './admin/requests-refused/requests-refused.component';
-import { GenerateRequestComponent } from './admin/generate-request/generate-request.component';
-
+import { GenerateRequestComponent } from './employee/generate-request/generate-request.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -57,24 +57,25 @@ import { GenerateRequestComponent } from './admin/generate-request/generate-requ
     RequestsAcceptedComponent,
     RequestsInprogressComponent,
     RequestsRefusedComponent,
-    GenerateRequestComponent ,
-    
+    GenerateRequestComponent,
+    ContactComponent,
+
 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule ,
-    Ng2SearchPipeModule ,
-    NgxPaginationModule ,
-    FormsModule ,
-    ReactiveFormsModule ,
-    HttpClientModule ,
-    
-    BrowserAnimationsModule ,
+    AppRoutingModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
 
-    ChartsModule ,
-    
- 
+    BrowserAnimationsModule,
+
+    ChartsModule,
+
+
 
 
   ],
