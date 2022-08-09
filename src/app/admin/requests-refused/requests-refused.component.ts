@@ -25,7 +25,7 @@ export class RequestsRefusedComponent  {
   messageSuccess: any;
   messageError: any;
   submitted: boolean = false;
-  p : any ;
+  p : any = 1 ;
   docDefinition: any ;
 
   constructor(private demandesServicesService:DemandesServicesService,private router:Router) {

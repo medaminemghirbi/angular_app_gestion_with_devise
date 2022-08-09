@@ -80,7 +80,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let item of dataArray | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
+                                *ngFor="let item of dataArray.requests | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
 
                                 <td> {{item.user.email}} </td>
                                 <td>{{item.start_date}} </td>
@@ -114,7 +114,7 @@
             </div>
         </div>
         <!-- Recent Sales End -->
-        <div class="has-text-centered" style="margin-left: 75%;">
+        <div class="has-text-centered" style="margin-left: 60%;">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
         <br>

@@ -33,6 +33,7 @@ import { RequestsInprogressComponent } from './admin/requests-inprogress/request
 import { RequestsRefusedComponent } from './admin/requests-refused/requests-refused.component';
 import { GenerateRequestComponent } from './employee/generate-request/generate-request.component';
 import { ContactComponent } from './contact/contact.component';
+import { TestComponent } from './test/test.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { ContactComponent } from './contact/contact.component';
     RequestsRefusedComponent,
     GenerateRequestComponent,
     ContactComponent,
+    TestComponent,
 
 
   ],

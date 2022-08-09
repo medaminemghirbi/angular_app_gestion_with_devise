@@ -17,7 +17,7 @@ export class DashboardAdminComponent  {
   dataArray: any;
   messageErr: any;
   searchedKeyword: any;
-  p: any;
+  p: any = 1 ;
 
   dataArrayy: any;
   admindata: any;
@@ -67,12 +67,12 @@ export class DashboardAdminComponent  {
     var dateF = new Date(dataF);
     var dateD = new Date(dataD);
 
-    console.log(dataF, dataD)
-    console.log(diffInDays)
+  //  console.log(dataF, dataD)
+  //  console.log(diffInDays)
 
     let days = Math.floor((dateF.getDay() - dateD.getDay()));
     var diff = 0 + days
-    console.log(diff)
+  //  console.log(diff)
     return diff.toString();
 
 
@@ -82,7 +82,7 @@ export class DashboardAdminComponent  {
     var dateF = new Date(dataF);
     var dateD = new Date(dataD);
 
-    console.log(dataF, dataD)
+   // console.log(dataF, dataD)
 
     let days = Math.floor((dateF.getDay() - dateD.getDay()));
 

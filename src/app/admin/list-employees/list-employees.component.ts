@@ -19,7 +19,7 @@ export class ListEmployeesComponent {
   dataArray: any;
   messageErr: any;
   searchedKeyword: any;
-  p: any;
+  p: any = 1 ;
   messageSuccess: any;
   updateemployees: FormGroup;
   addmissionn: any;

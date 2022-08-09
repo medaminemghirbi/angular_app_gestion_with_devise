@@ -21,7 +21,7 @@ export class EmployeeListRequestsComponent implements OnInit {
   messageErr: any;
   dataArray: any;
   searchedKeyword: any;
-  p: any;
+  p : any = 1 ;
   employeedata: any;
   messageError: any;
   messageSuccess: any;

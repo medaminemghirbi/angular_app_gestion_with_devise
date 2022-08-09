@@ -9,7 +9,7 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Requests ( {{dataArray.length}} ) </h6>
+                    <h6 class="mb-0">Requests ( {{dataArray.requests.length}} ) </h6>
                     <form class="d-none d-md-flex ms-4">
                         <input class="form-control border-0" type="search" placeholder="Search ..." name="email"
                             [(ngModel)]="searchedKeyword">
@@ -27,12 +27,12 @@
                                 <th scope="col">Reason </th>
                                 <th scope="col">Motif Refused </th>
                                 <th scope="col">Sending date </th>
-                                <th colspan="2">Action </th>
+                             
                             </tr>
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let item of dataArray | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
+                                *ngFor="let item of dataArray.requests | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
 
                                 <td> {{item.user.email}} </td>
                                 <td>{{item.start_date}} </td>
@@ -69,7 +69,7 @@
         </div>
         <!-- Recent Sales End -->
 
-        <div style="margin-left: 75%;">
+        <div style="margin-left: 60%;">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
     </div>

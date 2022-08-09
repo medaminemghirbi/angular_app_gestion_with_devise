@@ -36,8 +36,8 @@ export class UsersServicesService {
   }
 
   
-  logout (  ): Observable<any> {
-    return this.http.get(environment.urlBackend + 'users/sign_out/'   )
+  logout ( ): Observable<any> {
+    return this.http.delete(environment.urlBackend + 'users/sign_out/'   )
   }
 
 

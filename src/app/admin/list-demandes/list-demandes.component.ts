@@ -19,7 +19,7 @@ export class ListDemandesComponent {
   dataArray: any;
   messageErr: any;
   searchedKeyword: any;
-  p: any;
+  p: any = 1 ;
   messageSuccess: any;
   updateemployees: any;
   usersService: any;

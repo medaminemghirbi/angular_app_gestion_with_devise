@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit {
   logout(){
   
     this.usersServicesService.logout();
+    console.log("log out" )
     sessionStorage.clear() 
     this.router.navigate(['/']);
    

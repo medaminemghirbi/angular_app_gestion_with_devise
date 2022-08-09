@@ -19,6 +19,7 @@ import { RequestsInprogressComponent } from './admin/requests-inprogress/request
 import { RequestsRefusedComponent } from './admin/requests-refused/requests-refused.component';
 import { GenerateRequestComponent } from './employee/generate-request/generate-request.component';
 import { ContactComponent } from './contact/contact.component';
+import { TestComponent } from './test/test.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,9 @@ const routes: Routes = [
 
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
+
+  { path: 'test', component: TestComponent },
+
 
   /************************* ADMIN ******************************/
   { path: 'dashboard-admin', canActivate: [AuthGuardGuard], component: DashboardAdminComponent },
