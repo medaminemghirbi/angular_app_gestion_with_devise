@@ -7,7 +7,7 @@ import { DemandesServicesService } from 'src/app/services/demandes-services.serv
 import { UsersServicesService } from 'src/app/services/users-services.service';
 import Swal from 'sweetalert2';
 
-import * as pdfMake from'pdfmake/build/pdfmake.js';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
@@ -21,14 +21,17 @@ export class EmployeeListRequestsComponent implements OnInit {
   messageErr: any;
   dataArray: any;
   searchedKeyword: any;
-  p : any = 1 ;
+  p: any = 1;
   employeedata: any;
   messageError: any;
   messageSuccess: any;
   updaterequest: any;
   requestdetails: any;
-  docDefinition : any ;
-  
+  docDefinition: any;
+
+  dataArrayyy: any;
+
+
   constructor(private demandesServicesService: DemandesServicesService, private usersServicesService: UsersServicesService, private router: Router) {
 
     this.employeedata = JSON.parse(sessionStorage.getItem('employeedata')!);
@@ -68,15 +71,53 @@ export class EmployeeListRequestsComponent implements OnInit {
       sessionStorage.setItem('requestdetails', JSON.stringify(data));
 
       console.log(data)
-      this.dataArray = data
+  
 
+    //  var i = 1;
+    /*  for (let i = 0 ; i <= data; i++) {
+        console.log(i);
+        
+        var days = Math.floor(data.user.solde - (data.end_date.getDay() - data.start_date.getDay()))  ;
+        i += 1;
+        console.log(i);
+        console.log(days);
+      //  this.dataArrayyy = days
+        console.log(days);
+
+      }
+      */
+      this.dataArray = data , 
         // this.calculateDiff(this.dataArray.end_date, this.dataArray.start_date)
-
-        , (err: HttpErrorResponse) => {
-          this.messageErr = "We dont't found this demande in our database"
-        }
+        (err: HttpErrorResponse) => {
+        this.messageErr = "We dont't found this demande in our database"
+      }
     })
 
+   // this.calcul()
+
+  }
+
+  calcul() {
+    this.demandesServicesService.getRequestsByID(this.employeedata.id).subscribe(data => {
+
+      var i = 1;
+      for (i > 1; i <= data; i++) {
+        console.log(i);
+        var days = Math.floor(data.user.solde - (data.end_date.getDay() - data.start_date.getDay()));
+
+        i += 1;
+        console.log(i);
+        console.log(days);
+        this.dataArrayyy = days
+        console.log(this.dataArrayyy);
+
+      }
+      this.dataArrayyy = data
+
+      // this.calculateDiff(this.dataArray.end_date, this.dataArray.start_date)
+
+
+    })
   }
 
   calculateDiff(dataF: any, dataD: any) {
@@ -173,27 +214,27 @@ export class EmployeeListRequestsComponent implements OnInit {
 
     this.demandesServicesService.updateRequestByEmployee(this.dataRequest.id, formData).subscribe((response: any) => {
       console.log(response)
-      if (data.start_date < data.end_date ) {
+      if (data.start_date < data.end_date) {
 
-      let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
-      this.dataArray[indexId].id = data.id
-      this.dataArray[indexId].start_date = data.start_date
-      this.dataArray[indexId].end_date = data.end_date
-      this.dataArray[indexId].reason = data.reason
+        let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
+        this.dataArray[indexId].id = data.id
+        this.dataArray[indexId].start_date = data.start_date
+        this.dataArray[indexId].end_date = data.end_date
+        this.dataArray[indexId].reason = data.reason
 
-      this.messageSuccess = `this request : ${this.dataArray[indexId].id} is updated`
-      Swal.fire('Whooa !', 'Request Succeffully updated !', 'success')
-      window.location.reload();
+        this.messageSuccess = `this request : ${this.dataArray[indexId].id} is updated`
+        Swal.fire('Whooa !', 'Request Succeffully updated !', 'success')
+        window.location.reload();
       }
       else {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Start Date must be before End Date !' ,
-     
-            showConfirmButton: false,
-            timer: 1500
-        })  
+          text: 'Start Date must be before End Date !',
+
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
 
 

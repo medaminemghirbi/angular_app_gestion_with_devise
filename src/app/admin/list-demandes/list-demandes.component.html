@@ -9,7 +9,7 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Requests ( {{dataArray.length}} ) </h6>
+                    <h6 class="mb-0">Requests ( {{dataArray.requests.length}} ) </h6>
                     <form class="d-none d-md-flex ms-4">
                         <input class="form-control border-0" type="search" placeholder="Search ..." name="email"
                             [(ngModel)]="searchedKeyword">
@@ -26,6 +26,7 @@
                                 <th scope="col">Status</th>
                                 <th scope="col">Reason </th>
                                 <th scope="col">Motif Refused </th>
+                                <th scope="col">Solde </th>
                                 <th scope="col">Sending date </th>
                                 <th colspan="2">Actions</th>
                             </tr>
@@ -47,11 +48,12 @@
 
                                 <td>{{item.reason }} </td>
                                 <td>{{item.motif_refused }} </td>
+                                <td>{{item.user.solde }} </td>
                                 <td>{{item.created_at | date:'medium' }} </td>
 
                                 <td>
                                     <button *ngIf="item.status==='in_progress' || item.status==='refused'   "
-                                        (click)="getdata(item.status , item.start_date , item.end_date , item.reason, item.motif_refused , item.user.id ,item.id)"
+                                        (click)="getdata(item.status , item.start_date , item.end_date , item.reason, item.motif_refused ,item.user.solde , item.user.id ,item.id)"
                                         data-toggle="modal" data-target="#exampleModal"
                                         class="btn btn-square btn-outline-warning"><i class="fa fa-edit"
                                             aria-hidden="true"></i>
@@ -75,7 +77,7 @@
 
 
 
-                              
+
                             </tr>
                             <tr *ngIf="dataArray.requests.length==0">
                                 <td colspan="8" style="text-align:center;">no data found</td>
@@ -149,8 +151,17 @@
                     <br>
 
                     <div class="form-group">
+                        <label for="exampleFormControlInput1"> Solde </label>
+                        <input type="number" class="form-control" placeholder="solde" [defaultValue]="dataRequest.solde"
+                        [(ngModel)]="dataRequest.solde"
+                            required name="solde" formControlName="solde"  max="20" ngModel />
+                    </div>
+                    <br>
+
+                    <div class="form-group">
                         <label for="exampleFormControlInput1"> Motif Refused </label>
                         <input type="text" class="form-control" placeholder="motif_refused"
+                        [(ngModel)]="dataRequest.motif_refused"
                             [defaultValue]="dataRequest.motif_refused" required name="motif_refused"
                             formControlName="motif_refused" minlength="2" maxlength="20" ngModel />
                     </div>

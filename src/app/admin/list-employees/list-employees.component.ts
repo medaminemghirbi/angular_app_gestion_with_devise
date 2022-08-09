@@ -97,6 +97,7 @@ export class ListEmployeesComponent {
     first_name: '',
     address: '',
     phone: '',
+    solde : 20 ,
 
   }
 
@@ -109,6 +110,18 @@ export class ListEmployeesComponent {
     this.dataEmployee.first_name = first_name
     this.dataEmployee.address = address
     this.dataEmployee.phone = phone
+ 
+    this.dataEmployee.id = id
+
+    console.log(this.dataEmployee)
+
+  }
+
+  getdata2(email: string,solde:number, id: any) {
+
+    this.messageSuccess = ''
+    this.dataEmployee.email = email
+    this.dataEmployee.solde = solde
     this.dataEmployee.id = id
 
     console.log(this.dataEmployee)
@@ -129,17 +142,8 @@ export class ListEmployeesComponent {
 
 
       console.log(response)
-      this.submitted = true;
-      let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataEmployee.id)
-
-      this.dataArray[indexId].id = data.id
-      this.dataArray[indexId].email = data.email
-
-      this.dataArray[indexId].last_name = data.last_name
-      this.dataArray[indexId].first_name = data.first_name
-      this.dataArray[indexId].address = data.address
-      this.dataArray[indexId].phone = data.phone
-      this.messageSuccess = `this email : ${this.dataArray[indexId].email} is updated`
+   
+      
       Swal.fire('Whooa !', 'Employee Succeffully updated !', 'success')
       window.location.reload();
 

@@ -28,7 +28,7 @@
                                 <th scope="col">Last Name </th>
                                 <th scope="col">First Name </th>
                                 <th scope="col">Address </th>
-
+                           
 
                                 <th colspan="3">Actions</th>
                             </tr>
@@ -50,10 +50,11 @@
 
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#exampleModal1"
+                                    (click)="getdata2(item.email , item.solde  ,item.id)"
                                         class="btn btn-outline-info m-2">Solde </button>
                                 </td>
                                 <td> <button data-toggle="modal" data-target="#exampleModal" type="button"
-                                        (click)="getdata(item.email , item.last_name , item.first_name , item.address , item.phone ,item.id)"
+                                        (click)="getdata(item.email , item.last_name , item.first_name , item.address , item.phone  ,item.id)"
                                         class="btn btn-outline-warning m-2">Update</button>
                                 </td>
                                 <td>
@@ -88,8 +89,10 @@
                 <h5 class="modal-title" id="exampleModalLabel"> Solde </h5>
 
             </div>
-            <div class="modal-body">
-                his leave balance is : !! days/months
+            <div class="modal-body"  style="text-align:center ;" >
+                <h5>   {{dataEmployee.email}}    </h5>
+               <p> {{dataEmployee.solde}} Days !! </p>
+              
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

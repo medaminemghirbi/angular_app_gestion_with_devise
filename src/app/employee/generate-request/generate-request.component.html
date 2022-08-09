@@ -36,6 +36,14 @@
                                             {{employeedata.user.email}} </p>
                                     </div>
                                     <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6> Solde : </h6>
+                                        </div>
+                                        <p class="col-sm-7"
+                                            *ngIf="employeedata.user.solde && employeedata.user.solde !== 'null' ">
+                                            {{employeedata.user.solde}} Days </p>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-4">
                                             <h6> Phone : </h6>
                                         </div>

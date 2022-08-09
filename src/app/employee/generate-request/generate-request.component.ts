@@ -75,9 +75,10 @@ export class GenerateRequestComponent {
                 text: "Full Name : " + this.employeedata.user.last_name + " " + this.employeedata.user.first_name,
                 bold: true
               },
-              { text: "Employee Email : " + this.employeedata.user.email },
+              { text: "Email : " + this.employeedata.user.email },
+              { text: "Solde : " + this.employeedata.user.solde },
               { text: "Phone Number : " + this.employeedata.user.phone },
-              { text: "Employee Address : " + this.employeedata.user.address }
+              { text: "Address : " + this.employeedata.user.address }
             ],
             [
 
