@@ -34,6 +34,7 @@ import { RequestsRefusedComponent } from './admin/requests-refused/requests-refu
 import { GenerateRequestComponent } from './employee/generate-request/generate-request.component';
 import { ContactComponent } from './contact/contact.component';
 import { TestComponent } from './test/test.component';
+import { Test2Component } from './test2/test2.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { TestComponent } from './test/test.component';
     GenerateRequestComponent,
     ContactComponent,
     TestComponent,
+    Test2Component,
 
 
   ],
