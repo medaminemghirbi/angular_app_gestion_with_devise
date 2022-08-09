@@ -9,39 +9,70 @@ import { Observable } from 'rxjs';
 })
 export class UsersServicesService {
 
-  public connecte : boolean = false ; 
-  logged_in : boolean = false ; 
-  
-  constructor(private http : HttpClient , public router: Router ) {
+  constructor(private http: HttpClient, public router: Router) {
 
   }
 
-  login(data:any): Observable<any> {
-    this.logged_in = true ;
-    this.connecte = true;
+  /************************************************ ADMIN + EMPLOYEE ***************************************************/
+  login(data: any): Observable<any> {
     return this.http.post(environment.urlBackend + 'users/sign_in/', data);
   }
 
-  register(data:any) : Observable<any>  {
-    return this.http.post(environment.urlBackend + 'admin/' , data)
+  resetPassword(token: any, email: any): Observable<any> {
+    return this.http.put(environment.urlBackend + 'password_resets/' + token, email);
   }
 
-  getAllEmployees () {
-    return this.http.get(environment.urlBackend + 'employees/' )
-  }
-  
-  updateEmployee (id : any , newprofile : any )  {
-    return this.http.patch(environment.urlBackend + 'employees/' + id  , newprofile )
+  sendResetLink(email: any) {
+    return this.http.post(environment.urlBackend + 'password/forgot/', email);
   }
 
-  deleteEmployee (id : any ) {
-    return this.http.delete(environment.urlBackend + 'employees/' + id )
+
+  updateimageuser(id: any, data: any): Observable<any> {
+    return this.http.patch(environment.urlBackend + 'updateimguser/' + id, data);
   }
-  
-  countAllForAdmin () : Observable<any>  {
-    return this.http.get(environment.urlBackend + 'countall/' )
+
+  updateinfouser(id: any, data: any): Observable<any> {
+    return this.http.patch(environment.urlBackend + 'updateuser/' + id, data);
   }
 
   
+  logout ( ): Observable<any> {
+    return this.http.delete(environment.urlBackend + 'users/sign_out/'   )
+  }
+
+
+  /************************************************ ADMIN  **************************************************************/
+  registerAdmin(data: any): Observable<any> {
+    return this.http.post(environment.urlBackend + 'users/', data)
+  }
+
+  /************************************************FOR ADMIN ******************************************************/
+  registerEmployee(data: any): Observable<any> {
+    return this.http.post(environment.urlBackend + 'createEmployee/', data)
+  }
+
+  getAllEmployees() {
+    return this.http.get(environment.urlBackend + 'employees/')
+  }
+
+  updateEmployee(id: any, newprofile: any) {
+    return this.http.patch(environment.urlBackend + 'updateuser/' + id, newprofile)
+  }
+
+  deleteEmployee(id: any) {
+    return this.http.delete(environment.urlBackend + 'employees/' + id)
+  }
+
+  countAllForAdmin(): Observable<any> {
+    return this.http.get(environment.urlBackend + 'countall/')
+  }
+  
+  getemployeedata( id : any ): Observable<any> {
+    return this.http.get(environment.urlBackend + 'getemployeedata/'  +  id )
+  }
+
+
+
+
 
 }

@@ -1,0 +1,153 @@
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <app-sidebar-admin></app-sidebar-admin>
+
+    <div class="content">
+        <app-navbar-admin></app-navbar-admin>
+
+
+        <!-- Recent Sales Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-light text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Requests ( {{dataArray.requests.length}} ) </h6>
+                    <form class="d-none d-md-flex ms-4">
+                        <input class="form-control border-0" type="search" placeholder="Search ..." name="email"
+                            [(ngModel)]="searchedKeyword">
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-dark">
+
+                                <th scope="col">Email </th>
+                                <th scope="col">Start date </th>
+                                <th scope="col">End date </th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Reason </th>
+                                <th scope="col">Motif Refused </th>
+                                <th scope="col">Sending date </th>
+                             
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let item of dataArray.requests | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
+
+                                <td> {{item.user.email}} </td>
+                                <td>{{item.start_date}} </td>
+                                <td>{{item.end_date}} </td>
+
+                                <td *ngIf="item.status == 'in_progress' "><button type="button"
+                                        class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
+                                <td *ngIf="item.status == 'accepted' "><button type="button"
+                                        class="btn btn-success rounded-pill m-2">Accepted</button></td>
+                                <td *ngIf="item.status == 'refused' "><button type="button"
+                                        class="btn btn-danger rounded-pill m-2">Refused</button></td>
+
+                                <td>{{item.reason }} </td>
+                                <td>{{item.motif_refused }} </td>
+                                <td>{{item.created_at | date:'medium' }} </td>
+
+                                
+
+                               
+
+                               
+
+
+                              
+                            </tr>
+                            <tr *ngIf="dataArray.requests.length==0">
+                                <td colspan="8" style="text-align:center;">no data found</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Recent Sales End -->
+
+        <div style="margin-left: 60%;">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Modal Solde -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Solde </h5>
+
+            </div>
+            <div class="modal-body">
+                his leave balance is : !! days/months
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+            </div>
+            <div class="modal-body">
+                <!-- form update start here -->
+                <form [formGroup]="updaterequests" #f="ngForm" (ngSubmit)="updaterequest(f)">
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> User ID </label>
+                        <input type="text" class="form-control" placeholder="user_id"
+                            [defaultValue]="dataRequest.user_id" required name="user_id" formControlName="user_id"
+                            [(ngModel)]="dataRequest.user_id" minlength="2" maxlength="20" ngModel readonly />
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Status </label>
+
+                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="dataRequest.status"
+                            required formControlName="status" name="status">
+                            <option value="in_progress">In progress </option>
+                            <option value="accepted">accepted </option>
+                            <option value="refused">refused </option>
+                        </select>
+
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> Motif Refused </label>
+                        <input type="text" class="form-control" placeholder="motif_refused"
+                            [defaultValue]="dataRequest.motif_refused" required name="motif_refused"
+                            formControlName="motif_refused" minlength="2" maxlength="20" ngModel />
+                    </div>
+
+                    <br>
+
+                    <div class="alert alert-success" *ngIf="messageSuccess">
+                        {{messageSuccess}}
+                    </div>
+
+                    <button class="btn btn-primary">Update</button>
+                </form>
+
+                <!-- form update end here -->
+            </div>
+        </div>
+    </div>
+</div>

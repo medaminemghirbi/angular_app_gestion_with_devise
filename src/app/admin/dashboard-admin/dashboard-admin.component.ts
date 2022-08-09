@@ -12,17 +12,31 @@ import * as moment from 'moment';
   templateUrl: './dashboard-admin.component.html',
   styleUrls: ['./dashboard-admin.component.css']
 })
-export class DashboardAdminComponent implements OnInit {
+export class DashboardAdminComponent  {
 
   dataArray: any;
   messageErr: any;
   searchedKeyword: any;
-  p: any;
+  p: any = 1 ;
 
   dataArrayy: any;
+  admindata: any;
 
 
   constructor(private demandesServicesService: DemandesServicesService, private usersServicesService: UsersServicesService, private router: Router) {
+
+    this.demandesServicesService.getAllRequests().subscribe(data => {
+      // debugger
+      console.log(data)
+      this.dataArray = data
+
+        , (err: HttpErrorResponse) => {
+          this.messageErr = "We dont't found this demande in our database"
+        }
+    })
+
+    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
+    console.log(this.admindata)
 
     this.usersServicesService.countAllForAdmin().subscribe(result => {
 
@@ -41,85 +55,39 @@ export class DashboardAdminComponent implements OnInit {
     //  }
 
   };
-  
-    calculateDiff(dataF: any, dataD: any) {
-  
-           var sdate = moment(this.dataArray.start_date)
-      var edate = moment(this.dataArray.end_date)
-      var diffInDays = Math.floor(sdate.diff(edate, 'days')); 
-      
-      //       this.date = moment(Date.now()).format("YYYY-MM-DD"); 
-  
-      var dateF = new Date(dataF);
-      var dateD = new Date(dataD); 
-  
-      console.log(dataF, dataD)
-      console.log(diffInDays)
-  
-      let days = Math.floor((dateF.getDay() - dateD.getDay() )  );
-      var diff = 0 + days 
-      console.log(diff)
-      return diff.toString() ;
-  
-  
-    }
-  
-    jourRestant (dataF: any, dataD: any) {
-      var dateF = new Date(dataF);
-      var dateD = new Date(dataD); 
-  
-      console.log(dataF, dataD)
-  
-      let days = Math.floor((dateF.getDay() - dateD.getDay() )  );
 
-      var total = 20  - days
-      return total ;
-    }
+  calculateDiff(dataF: any, dataD: any) {
 
-  ngOnInit(): void {
-    this.demandesServicesService.getAllDemandes().subscribe(data => {
-      // debugger
-      console.log(data)
-      this.dataArray = data
+    var sdate = moment(this.dataArray.start_date)
+    var edate = moment(this.dataArray.end_date)
+    var diffInDays = Math.floor(sdate.diff(edate, 'days'));
 
-        // this.calculateDiff(this.dataArray.end_date, this.dataArray.start_date)
+    //       this.date = moment(Date.now()).format("YYYY-MM-DD"); 
 
-        , (err: HttpErrorResponse) => {
-          this.messageErr = "We dont't found this demande in our database"
-        }
-    })
+    var dateF = new Date(dataF);
+    var dateD = new Date(dataD);
+
+  //  console.log(dataF, dataD)
+  //  console.log(diffInDays)
+
+    let days = Math.floor((dateF.getDay() - dateD.getDay()));
+    var diff = 0 + days
+  //  console.log(diff)
+    return diff.toString();
+
 
   }
 
-  delete(id: any, i: number) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.demandesServicesService.deleteDemande(id).subscribe(response => {
-          console.log(response)
-          this.dataArray.splice(i, 1)
+  jourRestant(dataF: any, dataD: any) {
+    var dateF = new Date(dataF);
+    var dateD = new Date(dataD);
 
+   // console.log(dataF, dataD)
 
-        })
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-        window.location.reload();
+    let days = Math.floor((dateF.getDay() - dateD.getDay()));
 
-
-      }
-    })
-
-
+    var total = 20 - days
+    return total;
   }
 
 

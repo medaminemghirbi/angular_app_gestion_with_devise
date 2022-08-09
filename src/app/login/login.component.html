@@ -3,23 +3,26 @@
 
 <div class="main">
     <p class="sign" align="center">Sign in</p>
-    <form [formGroup]="loginForm" class="form1">
+    <form  class="form1">
 
-        <input class="un " type="text" align="center" name="email" formControlName="email" [(ngModel)]="user.email"
+        <input class="un " type="text" align="center" name="email" [(ngModel)]="user.email"
             placeholder="name@example.com">
 
-        <input class="pass" type="password" align="center" name="password" formControlName="password"
+        <input class="pass" type="password" align="center" name="password" 
             [(ngModel)]="user.password" placeholder="Password">
 
             <div class="alert alert-danger" *ngIf="messageError">
                 {{messageError}}
             </div>
             
-        <a class="submit" align="center" (click)="login()" >Sign in</a>
+        <button class="submit" align="center" (click)="login()" >Sign in</button>
 
-        <p class="forgot" align="center"><a routerLink="/rese-password">Forgot Password?</a></p>
+        <p class="forgot" align="center"><a routerLink="/forgot-password">Forgot Password?</a>
+            <a routerLink="/contact"> Contact Admin  </a> <br>
+            <a routerLink="/register">Sign up </a>
+        </p>
 
-        <p class="forgot" align="center"><a routerLink="/register">Sign up </a></p>
+       
 
     </form>
 </div>

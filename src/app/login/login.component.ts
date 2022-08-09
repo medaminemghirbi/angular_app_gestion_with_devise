@@ -11,16 +11,11 @@ import { UsersServicesService } from '../services/users-services.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
 
   public connecte: boolean = false;
 
   messageError: any
-
-  loginForm = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl()
-  })
 
   user: User = {
     email: '',
@@ -29,20 +24,25 @@ export class LoginComponent implements OnInit {
 
   constructor(private usersServicesService: UsersServicesService, private route: Router) { }
 
-  ngOnInit(): void {
-  }
 
   login() {
 
     const data = {
-      email: this.user.email,
-      password: this.user.password,
+      user:
+      {
+        email: this.user.email,
+        password: this.user.password,
+      }
 
     };
 
     this.usersServicesService.login(data).subscribe(
       response => {
-        console.log(response);
+      //  console.log(response);
+
+        //  console.log(JSON.parse(response).toString(response));
+        //   console.log(JSON.parse(JSON.stringify(response)));
+
         if (response.status == 401) {
 
           Swal.fire({
@@ -53,28 +53,120 @@ export class LoginComponent implements OnInit {
         } else {
 
 
-          if (response.status == 200) {
-            // if (response.role == 0 )
-            
-            console.log(response);
-            this.route.navigate(['/dashboard-admin']);
+          if (response.user.email_confirmed == true) {
+            if (response.role == "admin") {
+
+              sessionStorage.setItem('admindata', JSON.stringify(response));
+              console.log(response);
+              this.route.navigate(['/dashboard-admin']);
+
+            }
+            else if (response.role == "employee") {
+
+              sessionStorage.setItem('employeedata', JSON.stringify(response));
+              console.log(response);
+              this.route.navigate(['/dashboard-employee']);
+
+            }
+            else {
+
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Email or Password is Incorrect!'
+              })
+
+            }
+          } else {
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Account created but not confirmed ! , Check Your Email !'
+            })
+
           }
 
-        
-       else {
+        }
+
+      }, (err: HttpErrorResponse) => this.messageError = err.error.error);
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  login2() {
+
+    const data = {
+      user:
+      {
+        email: this.user.email,
+        password: this.user.password,
+      }
+
+    };
+
+    this.usersServicesService.login(data).subscribe(
+      response => {
+
+        //   sessionStorage.setItem('admindata', JSON.stringify(response));
+
+        console.log(JSON.parse(response).toString(response));
+        console.log(JSON.parse(JSON.stringify(response)));
+
+        if (response.status == 401) {
 
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Account created but not confirmed ! , check Your Email'
+            text: 'User Not Found Or invalide Credentialns'
           })
+        } else {
+
+
+          if (response.status == 200 && response.role == "admin") {
+            // if (response.role == 0 )
+            sessionStorage.setItem('admindata', JSON.stringify(response));
+
+            console.log(response);
+            this.route.navigate(['/dashboard-admin']);
+          }
+          else if (response.status == 200 && response.role == "employee") {
+            sessionStorage.setItem('employeedata', JSON.stringify(response));
+
+            console.log(response);
+            this.route.navigate(['/dashboard-employee']);
+          }
+
+
+          else {
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Account created but not confirmed ! , check Your Email'
+            })
+          }
+
         }
 
-      }
-     
-      },(err: HttpErrorResponse) => this.messageError = err.error.error);
-      
+      }, (err: HttpErrorResponse) => this.messageError = err.error.error);
+
   }
+
 
 
 }

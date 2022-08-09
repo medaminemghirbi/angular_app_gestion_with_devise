@@ -6,6 +6,9 @@ import { DemandesServicesService } from 'src/app/services/demandes-services.serv
 import { UsersServicesService } from 'src/app/services/users-services.service';
 import Swal from 'sweetalert2';
 
+import * as pdfMake from'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 @Component({
   selector: 'app-list-employees',
   templateUrl: './list-employees.component.html',
@@ -16,7 +19,7 @@ export class ListEmployeesComponent {
   dataArray: any;
   messageErr: any;
   searchedKeyword: any;
-  p: any;
+  p: any = 1 ;
   messageSuccess: any;
   updateemployees: FormGroup;
   addmissionn: any;
@@ -26,9 +29,13 @@ export class ListEmployeesComponent {
   route: any;
   submitted: boolean = false;
   messageError: any;
+  admindata: any;
 
 
   constructor(private employeesServicesService: UsersServicesService, private router: Router) {
+
+    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
+    console.log(this.admindata)
 
     this.employeesServicesService.getAllEmployees().subscribe(data => {
       // debugger
@@ -45,7 +52,7 @@ export class ListEmployeesComponent {
       last_name: new FormControl('', [Validators.required]),
       first_name: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
-
+      phone: new FormControl('', [Validators.required]),
     });
 
   }
@@ -89,17 +96,32 @@ export class ListEmployeesComponent {
     last_name: '',
     first_name: '',
     address: '',
+    phone: '',
+    solde : 20 ,
 
   }
 
-  getdata(email: string,  last_name: string, first_name: string, address: string, id: any) {
+  getdata(email: string, last_name: string, first_name: string, address: string, phone: any, id: any) {
     this.messageSuccess = ''
     this.dataEmployee.email = email
 
-   // this.dataEmployee.password = password
+    // this.dataEmployee.password = password
     this.dataEmployee.last_name = last_name
     this.dataEmployee.first_name = first_name
     this.dataEmployee.address = address
+    this.dataEmployee.phone = phone
+ 
+    this.dataEmployee.id = id
+
+    console.log(this.dataEmployee)
+
+  }
+
+  getdata2(email: string,solde:number, id: any) {
+
+    this.messageSuccess = ''
+    this.dataEmployee.email = email
+    this.dataEmployee.solde = solde
     this.dataEmployee.id = id
 
     console.log(this.dataEmployee)
@@ -114,26 +136,17 @@ export class ListEmployeesComponent {
     formData.append('last_name', this.updateemployees.value.last_name);
     formData.append('first_name', this.updateemployees.value.first_name);
     formData.append('address', this.updateemployees.value.address);
+    formData.append('phone', this.updateemployees.value.phone);
 
-
-    this.usersService.updateEmployee(this.dataEmployee.id, formData).subscribe((response: any) => {
+    this.employeesServicesService.updateEmployee(this.dataEmployee.id, formData).subscribe((response: any) => {
 
 
       console.log(response)
-      this.submitted = true;
-      let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataEmployee.id)
+   
+      
+      Swal.fire('Whooa !', 'Employee Succeffully updated !', 'success')
+      window.location.reload();
 
-      this.dataArray[indexId].id = data.id
-      this.dataArray[indexId].email = data.email
-      //  this.dataArray[indexId].password = data.password
-      this.dataArray[indexId].last_name = data.last_name
-      this.dataArray[indexId].first_name = data.first_name
-      this.dataArray[indexId].address = data.address
-
-      this.messageSuccess = `this title : ${this.dataArray[indexId].email} is updated`
-      Swal.fire('Whooa!', 'Employee Succeffully updated !', 'success')
-      //window.location.reload();
-      this.route.navigate(['/list-employees']);
 
 
     }, (err: HttpErrorResponse) => {

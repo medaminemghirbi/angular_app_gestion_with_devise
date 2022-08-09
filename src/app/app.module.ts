@@ -22,9 +22,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ListEmployeesComponent } from './admin/list-employees/list-employees.component';
 
-import {ButtonsModule, CardsModule, ChartsModule,  MDBBootstrapModule, TableModule } from 'angular-bootstrap-md';
+import { ButtonsModule, CardsModule, ChartsModule, MDBBootstrapModule, TableModule } from 'angular-bootstrap-md';
 import { CalendarComponent } from './employee/calendar/calendar.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SidebarComponent } from './employee/sidebar/sidebar.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { EmployeeListRequestsComponent } from './employee/employee-list-requests/employee-list-requests.component';
+import { RequestsAcceptedComponent } from './admin/requests-accepted/requests-accepted.component';
+import { RequestsInprogressComponent } from './admin/requests-inprogress/requests-inprogress.component';
+import { RequestsRefusedComponent } from './admin/requests-refused/requests-refused.component';
+import { GenerateRequestComponent } from './employee/generate-request/generate-request.component';
+import { ContactComponent } from './contact/contact.component';
+import { TestComponent } from './test/test.component';
+import { Test2Component } from './test2/test2.component';
 
 
 @NgModule({
@@ -42,23 +52,34 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     RegisterComponent,
     ListEmployeesComponent,
     CalendarComponent,
-    ResetPasswordComponent ,
-    
+    ResetPasswordComponent,
+    SidebarComponent,
+    ForgotPasswordComponent,
+    EmployeeListRequestsComponent,
+    RequestsAcceptedComponent,
+    RequestsInprogressComponent,
+    RequestsRefusedComponent,
+    GenerateRequestComponent,
+    ContactComponent,
+    TestComponent,
+    Test2Component,
+
 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule ,
-    Ng2SearchPipeModule ,
-    NgxPaginationModule ,
-    FormsModule ,
-    ReactiveFormsModule ,
-    HttpClientModule ,
-    
-    BrowserAnimationsModule ,
+    AppRoutingModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
 
-    ChartsModule ,
-    
+    BrowserAnimationsModule,
+
+    ChartsModule,
+
+
 
 
   ],
