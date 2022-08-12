@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "PFE_front-reworked": {
+    "front_projet_test": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,20 +17,17 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pfe-front-reworked",
+            "outputPath": "dist/front_gestion",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              
+              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css",
-              "node_modules/@apizee/apirtc/apiRTC.min.js"
-
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -40,12 +37,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "6mb"
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "6mb"
+                  "maximumError": "4kb"
                 }
               ],
               "fileReplacements": [
@@ -71,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "PFE_front-reworked:build:production"
+              "browserTarget": "front_gestion:build:production"
             },
             "development": {
-              "browserTarget": "PFE_front-reworked:build:development"
+              "browserTarget": "front_gestion:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "PFE_front-reworked:build"
+            "browserTarget": "front_gestion:build"
           }
         },
         "test": {
@@ -93,11 +90,10 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-             
+              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -106,5 +102,5 @@
       }
     }
   },
-  "defaultProject": "PFE_front-reworked"
+  "defaultProject": "front_gestion"
 }
