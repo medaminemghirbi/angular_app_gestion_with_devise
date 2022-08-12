@@ -13,7 +13,7 @@ import { AddDemandeComponent } from './employee/add-demande/add-demande.componen
 import { UpdateProfileComponent } from './employee/update-profile/update-profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,6 +35,7 @@ import { GenerateRequestComponent } from './employee/generate-request/generate-r
 import { ContactComponent } from './contact/contact.component';
 import { TestComponent } from './test/test.component';
 import { Test2Component } from './test2/test2.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -69,7 +70,7 @@ import { Test2Component } from './test2/test2.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    Ng2SearchPipeModule,
+    
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
@@ -79,7 +80,7 @@ import { Test2Component } from './test2/test2.component';
 
     ChartsModule,
 
-
+    Ng2SearchPipeModule 
 
 
   ],
