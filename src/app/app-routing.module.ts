@@ -36,7 +36,7 @@ const routes: Routes = [
 
 
   /************************* ADMIN ******************************/
-  { path: 'dashboard-admin' , component: DashboardAdminComponent },
+  { path: 'dashboard-admin', canActivate: [AuthGuardGuard], component: DashboardAdminComponent },
   { path: 'add-employee', canActivate: [AuthGuardGuard], component: AddEmployeeComponent },
   { path: 'list-requests', canActivate: [AuthGuardGuard], component: ListDemandesComponent },
   { path: 'list-employees', canActivate: [AuthGuardGuard], component: ListEmployeesComponent },
