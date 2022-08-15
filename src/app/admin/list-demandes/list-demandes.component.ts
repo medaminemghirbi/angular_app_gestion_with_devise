@@ -110,11 +110,11 @@ export class ListDemandesComponent {
     user_id: '',
     reason: '',
     motif_refused: '',
-    solde: 20 ,
+    solde: 20,
 
   }
 
-  getdata(status: string, start_date: string, end_date: string, reason: string, motif_refused: any , solde: number , user_id: any, id: any) {
+  getdata(status: string, start_date: string, end_date: string, reason: string, motif_refused: any, solde: number, user_id: any, id: any) {
     this.messageSuccess = ''
     this.dataRequest.status = status
     // this.dataRequest.password = password
@@ -140,29 +140,29 @@ export class ListDemandesComponent {
 
     // formData.append('reason', this.updaterequests.value.reason);
     formData.append('motif_refused', this.updaterequests.value.motif_refused);
-    formData.append('solde', this.updaterequests.value.solde);
+    //  formData.append('solde', this.updaterequests.value.solde);
     formData.append('user_id', this.updaterequests.value.user_id);
 
     this.demandesServicesService.updateRequest(this.dataRequest.id, formData).subscribe((response: any) => {
 
 
       console.log(response)
-    
-    /*  let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
 
-      this.dataArray[indexId].id = data.id
-      this.dataArray[indexId].status = data.status
-      //  this.dataArray[indexId].password = data.password
-      this.dataArray[indexId].start_date = data.start_date
-      this.dataArray[indexId].end_date = data.end_date
-      this.dataArray[indexId].reason = data.reason
-
-      this.dataArray[indexId].solde = data.solde
-      this.dataArray[indexId].motif_refused = data.motif_refused
-      this.dataArray[indexId].user_id = data.user_id
-
-      this.messageSuccess = `this request id : ${this.dataArray[indexId].id} is updated`
-      */
+      /*  let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
+  
+        this.dataArray[indexId].id = data.id
+        this.dataArray[indexId].status = data.status
+        //  this.dataArray[indexId].password = data.password
+        this.dataArray[indexId].start_date = data.start_date
+        this.dataArray[indexId].end_date = data.end_date
+        this.dataArray[indexId].reason = data.reason
+  
+        this.dataArray[indexId].solde = data.solde
+        this.dataArray[indexId].motif_refused = data.motif_refused
+        this.dataArray[indexId].user_id = data.user_id
+  
+        this.messageSuccess = `this request id : ${this.dataArray[indexId].id} is updated`
+        */
       Swal.fire('Whooa!', 'Request Succeffully updated !', 'success')
       console.log(response)
       window.location.reload();

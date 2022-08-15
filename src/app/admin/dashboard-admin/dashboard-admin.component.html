@@ -69,8 +69,8 @@
                                 <th scope="col">Start date </th>
                                 <th scope="col">End date </th>
                                 <th scope="col">Period </th>
-
-                                <th scope="col">Remaining days </th>
+                                <th scope="col">Solde </th>
+                       
                                 <th scope="col">Status</th>
                                 <th scope="col">Reason </th>
 
@@ -86,10 +86,9 @@
                                 <td>{{item.start_date}} </td>
                                 <td>{{item.end_date}} </td>
 
-                                <td> {{calculateDiff(item.end_date | date:'dd-MM-yyyy' , item.start_date |
-                                    date:'dd-MM-yyyy')}} days !! </td>
+                                <td> {{item.days }} Days !!</td>
 
-                                <td> {{ item.user.solde  }} days !! </td>
+                                <td> {{ item.user.solde  }} Days !! </td>
 
                                 <td *ngIf="item.status == 'in_progress' "><button type="button"
                                         class="btn btn-primary rounded-pill m-2">In_Progress</button></td>

@@ -15,9 +15,10 @@
                             [(ngModel)]="searchedKeyword">
                     </form>
                 </div>
-                <div align="left" >
-                    <button class="btn btn-outline-dark" routerLink="/add-employee"  > <i class="bi bi-plus"></i> Add Employee  </button>&nbsp;&nbsp;
-                   </div><br>
+                <div align="left">
+                    <button class="btn btn-outline-dark" routerLink="/add-employee"> <i class="bi bi-plus"></i> Add
+                        Employee </button>&nbsp;&nbsp;
+                </div><br>
                 <div class="table-responsive">
                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                         <thead>
@@ -28,7 +29,7 @@
                                 <th scope="col">Last Name </th>
                                 <th scope="col">First Name </th>
                                 <th scope="col">Address </th>
-                           
+
 
                                 <th colspan="3">Actions</th>
                             </tr>
@@ -37,7 +38,7 @@
                             <tr
                                 *ngFor="let item of dataArray.employees  | paginate: { itemsPerPage: 10 , currentPage: p } | filter:searchedKeyword ; index as i">
                                 <td><input class="form-check-input" type="checkbox"></td>
-                                
+
                                 <td> {{item.email}} </td>
 
                                 <td *ngIf="item.email_confirmed == true"><button type="button"
@@ -50,7 +51,7 @@
 
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#exampleModal1"
-                                    (click)="getdata2(item.email , item.solde  ,item.id)"
+                                        (click)="getdata2(item.email , item.solde  ,item.id)"
                                         class="btn btn-outline-info m-2">Solde </button>
                                 </td>
                                 <td> <button data-toggle="modal" data-target="#exampleModal" type="button"
@@ -89,10 +90,10 @@
                 <h5 class="modal-title" id="exampleModalLabel"> Solde </h5>
 
             </div>
-            <div class="modal-body"  style="text-align:center ;" >
-                <h5>   {{dataEmployee.email}}    </h5>
-               <p> {{dataEmployee.solde}} Days !! </p>
-              
+            <div class="modal-body" style="text-align:center ;">
+                <h5> {{dataEmployee.email}} </h5>
+                <p> {{dataEmployee.solde}} Days !! </p>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -117,8 +118,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Email </label>
                         <input type="text" class="form-control" placeholder="email" [(ngModel)]="dataEmployee.email"
-                        [defaultValue]=""
-                            name="email" required formControlName="email" ngModel minlength="2" />
+                            [defaultValue]="" name="email" required formControlName="email" ngModel minlength="2" />
                     </div>
 
 

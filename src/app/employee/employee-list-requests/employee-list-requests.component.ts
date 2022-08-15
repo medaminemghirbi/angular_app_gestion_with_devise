@@ -217,10 +217,7 @@ export class EmployeeListRequestsComponent implements OnInit {
       if (data.start_date < data.end_date) {
 
         let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
-        this.dataArray[indexId].id = data.id
-        this.dataArray[indexId].start_date = data.start_date
-        this.dataArray[indexId].end_date = data.end_date
-        this.dataArray[indexId].reason = data.reason
+    
 
         this.messageSuccess = `this request : ${this.dataArray[indexId].id} is updated`
         Swal.fire('Whooa !', 'Request Succeffully updated !', 'success')

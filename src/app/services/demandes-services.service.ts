@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +34,7 @@ export class DemandesServicesService {
   }
 
   updateRequest(id: any, data: any): Observable<any> {
-    return this.http.patch(environment.urlBackend + 'requests/' + id, data)
+    return this.http.patch(environment.urlBackend + 'request/' + id, data)
   }
 
   updateRequestByEmployee(id: any, data: any): Observable<any> {
