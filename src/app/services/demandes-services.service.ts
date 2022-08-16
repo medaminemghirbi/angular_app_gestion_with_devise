@@ -34,7 +34,7 @@ export class DemandesServicesService {
   }
 
   updateRequest(id: any, data: any): Observable<any> {
-    return this.http.patch(environment.urlBackend + 'request/' + id, data)
+    return this.http.patch(environment.urlBackend + 'requests/' + id, data)
   }
 
   updateRequestByEmployee(id: any, data: any): Observable<any> {
