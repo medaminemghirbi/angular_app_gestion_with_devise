@@ -6,7 +6,7 @@ import { DemandesServicesService } from 'src/app/services/demandes-services.serv
 import { UsersServicesService } from 'src/app/services/users-services.service';
 import Swal from 'sweetalert2';
 
-import * as pdfMake from'pdfmake/build/pdfmake.js';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
@@ -19,7 +19,7 @@ export class ListEmployeesComponent {
   dataArray: any;
   messageErr: any;
   searchedKeyword: any;
-  p: any = 1 ;
+  p: any = 1;
   messageSuccess: any;
   updateemployees: FormGroup;
   addmissionn: any;
@@ -97,7 +97,7 @@ export class ListEmployeesComponent {
     first_name: '',
     address: '',
     phone: '',
-    solde : 20 ,
+    solde: 20,
 
   }
 
@@ -110,14 +110,14 @@ export class ListEmployeesComponent {
     this.dataEmployee.first_name = first_name
     this.dataEmployee.address = address
     this.dataEmployee.phone = phone
- 
+
     this.dataEmployee.id = id
 
     console.log(this.dataEmployee)
 
   }
 
-  getdata2(email: string,solde:number, id: any) {
+  getdata2(email: string, solde: number, id: any) {
 
     this.messageSuccess = ''
     this.dataEmployee.email = email
@@ -132,7 +132,7 @@ export class ListEmployeesComponent {
     let data = f.value
     const formData = new FormData();
     formData.append('email', this.updateemployees.value.email);
-    // formData.append('password', this.updateemployees.value.password);
+    formData.append('password', this.updateemployees.value.password);
     formData.append('last_name', this.updateemployees.value.last_name);
     formData.append('first_name', this.updateemployees.value.first_name);
     formData.append('address', this.updateemployees.value.address);
@@ -140,10 +140,8 @@ export class ListEmployeesComponent {
 
     this.employeesServicesService.updateEmployee(this.dataEmployee.id, formData).subscribe((response: any) => {
 
-
       console.log(response)
-   
-      
+
       Swal.fire('Whooa !', 'Employee Succeffully updated !', 'success')
       window.location.reload();
 

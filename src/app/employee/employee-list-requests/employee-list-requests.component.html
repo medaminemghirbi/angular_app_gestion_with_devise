@@ -22,16 +22,16 @@
                         <thead>
                             <tr class="text-dark">
 
-                                <th scope="col">Email </th>
+                               
                                 <th scope="col">Start date </th>
                                 <th scope="col">End date </th>
                                 <th scope="col">Days </th>
-
-                                <th scope="col">Remaining days </th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Reason </th>
+                                <th scope="col"> Description </th>
                                 <th scope="col">Motif Refused </th>
-                                <th scope="col"> Solde </th>
+
+
                                 <th colspan="3">Actions </th>
 
                             </tr>
@@ -41,13 +41,11 @@
                                 *ngFor="let item of dataArray.requests | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
 
 
-                                <td> {{item.user.email}} </td>
+                               
                                 <td>{{item.start_date}} </td>
                                 <td>{{item.end_date}} </td>
 
                                 <td> {{ item.days }} Days</td>
-
-                                <td> {{ item.user.solde }} Days !! </td>
 
                                 <td *ngIf="item.status == 'in_progress' "><button type="button"
                                         class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
@@ -57,6 +55,7 @@
                                         class="btn btn-danger rounded-pill m-2">Refused</button></td>
 
                                 <td>{{item.reason}} </td>
+                                <td> {{ item.description }}</td>
                                 <td>{{item.motif_refused}} </td>
 
 
@@ -64,7 +63,7 @@
 
                                 <td>
                                     <button *ngIf="item.status==='in_progress' || item.status==='refused'   "
-                                        (click)="getdata(item.start_date , item.end_date , item.reason  ,item.id)"
+                                        (click)="getdata(item.start_date , item.end_date , item.reason , item.description ,item.id)"
                                         data-toggle="modal" data-target="#exampleModal"
                                         class="btn btn-square btn-outline-warning"><i class="fa fa-edit"
                                             aria-hidden="true"></i>
@@ -103,6 +102,7 @@
                 </div>
             </div>
         </div>
+        <br>
         <!-- Recent Sales End -->
         <div class="has-text-centered" style="margin-left: 60%;">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -151,6 +151,13 @@
                             <option value="Autres">Autres </option>
 
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> Description </label>
+                        <textarea type="text" class="form-control" placeholder="description .. " name="description"
+                            [(ngModel)]="dataRequest.description" required name="description"
+                            formControlName="description" ngModel> </textarea>
                     </div>
 
                     <br>

@@ -30,6 +30,7 @@ export class EmployeeListRequestsComponent implements OnInit {
   docDefinition: any;
 
   dataArrayyy: any;
+  date: any;
 
 
   constructor(private demandesServicesService: DemandesServicesService, private usersServicesService: UsersServicesService, private router: Router) {
@@ -59,7 +60,8 @@ export class EmployeeListRequestsComponent implements OnInit {
     this.updaterequest = new FormGroup({
       start_date: new FormControl('', [Validators.required]),
       end_date: new FormControl('', [Validators.required]),
-      reason: new FormControl('', [Validators.required])
+      reason: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
 
     });
 
@@ -71,29 +73,29 @@ export class EmployeeListRequestsComponent implements OnInit {
       sessionStorage.setItem('requestdetails', JSON.stringify(data));
 
       console.log(data)
+
+
+      //  var i = 1;
+      /*  for (let i = 0 ; i <= data; i++) {
+          console.log(i);
+          
+          var days = Math.floor(data.user.solde - (data.end_date.getDay() - data.start_date.getDay()))  ;
+          i += 1;
+          console.log(i);
+          console.log(days);
+        //  this.dataArrayyy = days
+          console.log(days);
   
-
-    //  var i = 1;
-    /*  for (let i = 0 ; i <= data; i++) {
-        console.log(i);
-        
-        var days = Math.floor(data.user.solde - (data.end_date.getDay() - data.start_date.getDay()))  ;
-        i += 1;
-        console.log(i);
-        console.log(days);
-      //  this.dataArrayyy = days
-        console.log(days);
-
-      }
-      */
-      this.dataArray = data , 
+        }
+        */
+      this.dataArray = data,
         // this.calculateDiff(this.dataArray.end_date, this.dataArray.start_date)
         (err: HttpErrorResponse) => {
-        this.messageErr = "We dont't found this demande in our database"
-      }
+          this.messageErr = "We dont't found this demande in our database"
+        }
     })
 
-   // this.calcul()
+    // this.calcul()
 
   }
 
@@ -189,15 +191,17 @@ export class EmployeeListRequestsComponent implements OnInit {
     id: '',
     start_date: '',
     end_date: '',
-    reason: ''
+    reason: '',
+    description: ''
 
   }
 
-  getdata(start_date: string, end_date: string, reason: string, id: any) {
+  getdata(start_date: string, end_date: string, reason: string, description: string, id: any) {
     this.messageSuccess = ''
     this.dataRequest.start_date = start_date
     this.dataRequest.end_date = end_date
     this.dataRequest.reason = reason
+    this.dataRequest.description = description
     this.dataRequest.id = id
 
     console.log(this.dataRequest)
@@ -208,20 +212,34 @@ export class EmployeeListRequestsComponent implements OnInit {
     let data = f.value
     const formData = new FormData();
     formData.append('start_date', this.updaterequest.value.start_date);
-    // formData.append('password', this.updaterequest.value.password);
     formData.append('end_date', this.updaterequest.value.end_date);
     formData.append('reason', this.updaterequest.value.reason);
+    formData.append('description', this.updaterequest.value.description);
 
-    this.demandesServicesService.updateRequestByEmployee(this.dataRequest.id, formData).subscribe((response: any) => {
-      console.log(response)
-      if (data.start_date < data.end_date) {
+    this.date = moment(Date.now()).format("YYYY-MM-DD");
+    if (data.start_date > this.date) {
 
-        let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
-    
+      if (data.start_date <= data.end_date) {
 
-        this.messageSuccess = `this request : ${this.dataArray[indexId].id} is updated`
-        Swal.fire('Whooa !', 'Request Succeffully updated !', 'success')
-        window.location.reload();
+        this.demandesServicesService.updateRequestByEmployee(this.dataRequest.id, formData).subscribe((response: any) => {
+          console.log(response)
+
+          Swal.fire('Whooa !', 'Request Succeffully updated !', 'success')
+          window.location.reload();
+
+
+        }, (err: HttpErrorResponse) => {
+          console.log(err.message)
+          this.messageError = "champs required or not valid !"
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'champs required or not valid !',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
       }
       else {
         Swal.fire({
@@ -234,20 +252,18 @@ export class EmployeeListRequestsComponent implements OnInit {
         })
       }
 
+    }
+    else {
 
-    }, (err: HttpErrorResponse) => {
-      console.log(err.message)
-      this.messageError = "champs required or not valid !"
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'champs required or not valid !',
-        position: 'top-end',
+        text: 'Start Date must be after current date !',
+
         showConfirmButton: false,
         timer: 1500
       })
-    })
-
+    }
 
 
   }
