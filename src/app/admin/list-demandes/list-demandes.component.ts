@@ -123,7 +123,7 @@ export class ListDemandesComponent {
 
       Swal.fire('Whooa!', 'Request Succeffully updated !', 'success')
 
-     // window.location.reload();
+      window.location.reload();
 
 
     }, (err: HttpErrorResponse) => {
