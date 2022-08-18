@@ -30,7 +30,7 @@ export class AddDemandeComponent {
       end_date: new FormControl('', [Validators.required]),
       reason: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-   //   motif_refused: new FormControl('', [Validators.required]),
+      //   motif_refused: new FormControl('', [Validators.required]),
       user_id: new FormControl('', [Validators.required])
 
     });
@@ -44,14 +44,14 @@ export class AddDemandeComponent {
     formData.append('end_date', this.addrequestt.value.end_date);
     formData.append('reason', this.addrequestt.value.reason);
     formData.append('description', this.addrequestt.value.description);
-  //  formData.append('motif_refused', '');
+    //  formData.append('motif_refused', '');
     formData.append('user_id', this.employeedata.id);
 
     let data = f.value
 
     console.log(data)
 
-    this.date = moment(Date.now()).format("YYYY-MM-DD");
+    this.date = moment(Date.now()).format("DD/MM/YYYY");
     if (data.start_date > this.date) {
 
       if (data.start_date <= data.end_date) {
@@ -69,11 +69,9 @@ export class AddDemandeComponent {
           // window.location.reload();
           this.router.navigate(['/employee-list-requests'])
 
-
         }, (err: HttpErrorResponse) => {
 
-          this.messageError = "champs required or not valid"
-
+         // this.messageError = "champs required or not valid"
           Swal.fire({
             icon: 'error',
             title: 'Oops...',

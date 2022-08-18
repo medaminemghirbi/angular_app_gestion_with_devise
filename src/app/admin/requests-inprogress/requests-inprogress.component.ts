@@ -126,23 +126,8 @@ export class RequestsInprogressComponent {
 
     this.demandesServicesService.updateRequest(this.dataRequest.id, formData).subscribe((response: any) => {
 
-
       console.log(response)
-      // this.submitted = true;
-      let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
-
-      this.dataArray[indexId].id = data.id
-      this.dataArray[indexId].status = data.status
-      //  this.dataArray[indexId].password = data.password
-      this.dataArray[indexId].start_date = data.start_date
-      this.dataArray[indexId].end_date = data.end_date
-      this.dataArray[indexId].reason = data.reason
-
-      
-      this.dataArray[indexId].motif_refused = data.motif_refused
-      this.dataArray[indexId].user_id = data.user_id
-
-      this.messageSuccess = `this request id : ${this.dataArray[indexId].id} is updated`
+     
       Swal.fire('Whooa!', 'Request Succeffully updated !', 'success')
      
       window.location.reload();

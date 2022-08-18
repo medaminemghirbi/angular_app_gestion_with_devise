@@ -22,7 +22,7 @@
                         <thead>
                             <tr class="text-dark">
 
-                                <th scope="col">Email </th>
+                               
                                 <th scope="col">Start date </th>
                                 <th scope="col">End date </th>
                                 <th scope="col">Days </th>
@@ -41,7 +41,7 @@
                                 *ngFor="let item of dataArray.requests | paginate: { itemsPerPage: 10, currentPage: p } | filter:searchedKeyword ; index as i">
 
 
-                                <td> {{item.user.email}} </td>
+                               
                                 <td>{{item.start_date}} </td>
                                 <td>{{item.end_date}} </td>
 

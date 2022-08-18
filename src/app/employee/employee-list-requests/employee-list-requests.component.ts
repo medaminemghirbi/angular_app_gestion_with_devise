@@ -225,7 +225,7 @@ export class EmployeeListRequestsComponent implements OnInit {
           console.log(response)
 
           Swal.fire('Whooa !', 'Request Succeffully updated !', 'success')
-         // window.location.reload();
+          window.location.reload();
 
 
         }, (err: HttpErrorResponse) => {
