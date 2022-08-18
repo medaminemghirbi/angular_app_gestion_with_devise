@@ -23,10 +23,12 @@
                                 <th scope="col">Email </th>
                                 <th scope="col">Start date </th>
                                 <th scope="col">End date </th>
+                                <th scope="col">Period </th>
+                                <th scope="col">Solde </th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Reason </th>
                                 <th scope="col">Motif Refused </th>
-                                <th scope="col">Solde </th>
+
                                 <th scope="col">Sending date </th>
                                 <th colspan="2">Actions</th>
                             </tr>
@@ -38,7 +40,8 @@
                                 <td> {{item.user.email}} </td>
                                 <td>{{item.start_date}} </td>
                                 <td>{{item.end_date}} </td>
-
+                                <td>{{item.days }} Days !!</td>
+                                <td>{{item.user.solde }} Days</td>
                                 <td *ngIf="item.status == 'in_progress' "><button type="button"
                                         class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
                                 <td *ngIf="item.status == 'accepted' "><button type="button"
@@ -48,7 +51,7 @@
 
                                 <td>{{item.reason }} </td>
                                 <td>{{item.motif_refused }} </td>
-                                <td>{{item.user.solde }} </td>
+
                                 <td>{{item.created_at | date:'medium' }} </td>
 
                                 <td>
@@ -74,10 +77,6 @@
                                             class="fa fa-trash" aria-hidden="true"></i> </button>
                                 </td>
 
-
-
-
-
                             </tr>
                             <tr *ngIf="dataArray.requests.length==0">
                                 <td colspan="8" style="text-align:center;">no data found</td>
@@ -95,26 +94,6 @@
         </div>
     </div>
 
-</div>
-
-<!-- Modal Solde -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Solde </h5>
-
-            </div>
-            <div class="modal-body">
-                his leave balance is : !! days/months
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Modal Update -->
@@ -150,20 +129,14 @@
 
                     <br>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1"> Solde </label>
-                        <input type="number" class="form-control" placeholder="solde" [defaultValue]="dataRequest.solde"
-                        [(ngModel)]="dataRequest.solde"
-                            required name="solde" formControlName="solde"  max="20" ngModel />
-                    </div>
+
                     <br>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1"> Motif Refused </label>
                         <input type="text" class="form-control" placeholder="motif_refused"
-                        [(ngModel)]="dataRequest.motif_refused"
-                            [defaultValue]="dataRequest.motif_refused" required name="motif_refused"
-                            formControlName="motif_refused" minlength="2" maxlength="20" ngModel />
+                            [(ngModel)]="dataRequest.motif_refused" [defaultValue]="dataRequest.motif_refused" required
+                            name="motif_refused" formControlName="motif_refused" minlength="2" maxlength="20" ngModel />
                     </div>
 
                     <br>

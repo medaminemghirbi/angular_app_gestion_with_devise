@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { DemandesServicesService } from 'src/app/services/demandes-services.service';
 import Swal from 'sweetalert2';
 
@@ -17,7 +18,7 @@ export class AddDemandeComponent {
   dataArray: any;
   employeedata: any;
   addrequestt: FormGroup;
-
+  date: any;
 
   constructor(private demandesServicesService: DemandesServicesService, private router: Router) {
     this.employeedata = JSON.parse(sessionStorage.getItem('employeedata')!);
@@ -37,7 +38,7 @@ export class AddDemandeComponent {
 
   addRequestt(f: any) {
     const formData = new FormData();
-    formData.append('status', 'in_progress' );
+    formData.append('status', 'in_progress');
     formData.append('start_date', this.addrequestt.value.start_date);
     formData.append('end_date', this.addrequestt.value.end_date);
     formData.append('reason', this.addrequestt.value.reason);
@@ -47,33 +48,53 @@ export class AddDemandeComponent {
     let data = f.value
 
     console.log(data)
+
+
     this.demandesServicesService.addRequest(formData).subscribe(() => {
 
-    //  this.date = moment(Date.now()).format("YYYY-MM-DD"); 
-      if (data.start_date < data.end_date ) {
+      this.date = moment(Date.now()).format("YYYY-MM-DD");
+      if (data.start_date > this.date) {
 
-      Swal.fire({
-        icon: 'success',
-        title: 'success...',
-        text: 'Saved !',
+        console.log(this.date)
+        console.log(data.start_date)
+        //  this.date = moment(Date.now()).format("YYYY-MM-DD"); 
+        if (data.start_date < data.end_date) {
 
-        showConfirmButton: true,
-        timer: 1500
-      })
-      // window.location.reload();
-      this.router.navigate(['/employee-list-requests'])
-    }
+          Swal.fire({
+            icon: 'success',
+            title: 'Success...',
+            text: 'Saved !',
 
-    else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Start Date must be before End Date !' ,
-   
+            showConfirmButton: true,
+            timer: 1500
+          })
+          // window.location.reload();
+          this.router.navigate(['/employee-list-requests'])
+        }
+
+        else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Start Date must be before End Date !',
+
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      }
+      else {
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Start Date must be after current date !',
+
           showConfirmButton: false,
           timer: 1500
-      })  
-    }
+        })
+      }
+
     }, (err: HttpErrorResponse) => {
 
 
