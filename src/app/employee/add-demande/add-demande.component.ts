@@ -45,7 +45,7 @@ export class AddDemandeComponent {
     formData.append('reason', this.addrequestt.value.reason);
     formData.append('description', this.addrequestt.value.description);
   //  formData.append('motif_refused', '');
-    formData.append('user_id', this.employeedata.user.id);
+    formData.append('user_id', this.employeedata.id);
 
     let data = f.value
 
