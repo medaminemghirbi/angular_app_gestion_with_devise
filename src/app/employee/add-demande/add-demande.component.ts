@@ -29,7 +29,8 @@ export class AddDemandeComponent {
       start_date: new FormControl('', [Validators.required]),
       end_date: new FormControl('', [Validators.required]),
       reason: new FormControl('', [Validators.required]),
-      motif_refused: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+   //   motif_refused: new FormControl('', [Validators.required]),
       user_id: new FormControl('', [Validators.required])
 
     });
@@ -42,23 +43,20 @@ export class AddDemandeComponent {
     formData.append('start_date', this.addrequestt.value.start_date);
     formData.append('end_date', this.addrequestt.value.end_date);
     formData.append('reason', this.addrequestt.value.reason);
-    formData.append('motif_refused', '');
+    formData.append('description', this.addrequestt.value.description);
+  //  formData.append('motif_refused', '');
     formData.append('user_id', this.employeedata.user.id);
 
     let data = f.value
 
     console.log(data)
 
+    this.date = moment(Date.now()).format("YYYY-MM-DD");
+    if (data.start_date > this.date) {
 
-    this.demandesServicesService.addRequest(formData).subscribe(() => {
+      if (data.start_date <= data.end_date) {
 
-      this.date = moment(Date.now()).format("YYYY-MM-DD");
-      if (data.start_date > this.date) {
-
-        console.log(this.date)
-        console.log(data.start_date)
-        //  this.date = moment(Date.now()).format("YYYY-MM-DD"); 
-        if (data.start_date < data.end_date) {
+        this.demandesServicesService.addRequest(formData).subscribe(() => {
 
           Swal.fire({
             icon: 'success',
@@ -70,45 +68,49 @@ export class AddDemandeComponent {
           })
           // window.location.reload();
           this.router.navigate(['/employee-list-requests'])
-        }
 
-        else {
+
+        }, (err: HttpErrorResponse) => {
+
+          this.messageError = "champs required or not valid"
+
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Start Date must be before End Date !',
-
+            text: 'champs required or not valid !',
+            position: 'top-end',
             showConfirmButton: false,
             timer: 1500
           })
-        }
-      }
-      else {
+        });
 
+
+      }
+
+      else {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Start Date must be after current date !',
+          text: 'Start Date must be before End Date !',
 
           showConfirmButton: false,
           timer: 1500
         })
       }
 
-    }, (err: HttpErrorResponse) => {
-
-
-      this.messageError = "champs required or not valid"
+    }
+    else {
 
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'champs required or not valid !',
-        position: 'top-end',
+        text: 'Start Date must be after current date !',
+
         showConfirmButton: false,
         timer: 1500
       })
-    });
+    }
+
   }
 
 

@@ -128,7 +128,7 @@ export class RequestsInprogressComponent {
 
 
       console.log(response)
-      this.submitted = true;
+      // this.submitted = true;
       let indexId = this.dataArray.findIndex((obj: any) => obj.id == this.dataRequest.id)
 
       this.dataArray[indexId].id = data.id

@@ -5,7 +5,7 @@
     &nbsp; &nbsp;
     &nbsp; &nbsp; &nbsp; &nbsp;
     <div class="content">
-        <br><br><br>
+        <br>
 
         <!-- Form Start -->
         <div class="container-fluid pt-4 px-4">
@@ -30,11 +30,14 @@
                                 <input type="date" formControlName="end_date" name="end_date" required
                                     class="form-control" id="exampleInputPassword1">
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label"> Motif For Accepted </label>
 
-                                <select class="form-control" id="exampleFormControlSelect1"
-                                    formControlName="reason" name="reason">
+
+
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label"> Reason </label>
+
+                                <select class="form-control" id="exampleFormControlSelect1" formControlName="reason"
+                                    name="reason">
 
                                     <option value="Sickness">Sickness </option>
                                     <option value="Holiday">Holiday </option>
@@ -45,6 +48,11 @@
                                 </select>
 
 
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Description </label>
+                                <textarea type="text" formControlName="description" name="description" required
+                                    class="form-control" id="exampleInputPassword1"> </textarea>
                             </div>
 
                             <div class="alert alert-danger" *ngIf="messageError">{{messageError}}</div>

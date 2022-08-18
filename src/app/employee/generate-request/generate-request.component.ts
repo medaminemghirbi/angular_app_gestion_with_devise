@@ -71,14 +71,10 @@ export class GenerateRequestComponent {
         {
           columns: [
             [
-              {
-                text: "Full Name : " + this.employeedata.user.last_name + " " + this.employeedata.user.first_name,
-                bold: true
-              },
+             
               { text: "Email : " + this.employeedata.user.email },
               { text: "Solde : " + this.employeedata.user.solde },
-              { text: "Phone Number : " + this.employeedata.user.phone },
-              { text: "Address : " + this.employeedata.user.address }
+            
             ],
             [
 
@@ -99,7 +95,9 @@ export class GenerateRequestComponent {
               },
               { text: "Start_date : " + this.requestdetails.map(function (a: any) { return a.start_date; }) },
               { text: "End_date : " + this.requestdetails.map(function (a: any) { return a.end_date; }) },
+              { text: "Period (Days) : " + this.requestdetails.map(function (a: any) { return a.days; }) },
               { text: "Reason : " + this.requestdetails.map(function (a: any) { return a.reason; }) },
+              { text: "Description : " + this.requestdetails.map(function (a: any) { return a.description; }) },
               { text: "Motif_refused : " + this.requestdetails.map(function (a: any) { return a.motif_refused; }) }
             ],
             [

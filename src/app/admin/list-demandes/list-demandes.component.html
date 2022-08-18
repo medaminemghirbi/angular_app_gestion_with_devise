@@ -40,7 +40,7 @@
                                 <td> {{item.user.email}} </td>
                                 <td>{{item.start_date}} </td>
                                 <td>{{item.end_date}} </td>
-                                <td>{{item.days }} Days !!</td>
+                                <td>{{item.days }} Days</td>
                                 <td>{{item.user.solde }} Days</td>
                                 <td *ngIf="item.status == 'in_progress' "><button type="button"
                                         class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
@@ -56,7 +56,7 @@
 
                                 <td>
                                     <button *ngIf="item.status==='in_progress' || item.status==='refused'   "
-                                        (click)="getdata(item.status , item.start_date , item.end_date , item.reason, item.motif_refused ,item.user.solde , item.user.id ,item.id)"
+                                        (click)="getdata(item.status , item.motif_refused , item.user_id , item.id)"
                                         data-toggle="modal" data-target="#exampleModal"
                                         class="btn btn-square btn-outline-warning"><i class="fa fa-edit"
                                             aria-hidden="true"></i>
@@ -107,22 +107,24 @@
                 <!-- form update start here -->
                 <form [formGroup]="updaterequests" #f="ngForm" (ngSubmit)="updaterequest(f)">
 
+
                     <div class="form-group">
                         <label for="exampleFormControlInput1"> User ID </label>
                         <input type="text" class="form-control" placeholder="user_id"
                             [defaultValue]="dataRequest.user_id" required name="user_id" formControlName="user_id"
-                            [(ngModel)]="dataRequest.user_id" minlength="2" maxlength="20" ngModel readonly />
+                            [(ngModel)]="dataRequest.user_id" ngModel readonly />
                     </div>
                     <br>
+
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Status </label>
 
                         <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="dataRequest.status"
-                            required formControlName="status" name="status">
-                            <option value="in_progress">In progress </option>
-                            <option value="accepted">accepted </option>
-                            <option value="refused">refused </option>
+                            formControlName="status" name="status" ngModel>
+                            <option value="0">In progress </option>
+                            <option value="1">accepted </option>
+                            <option value="2">refused </option>
                         </select>
 
                     </div>
@@ -135,7 +137,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1"> Motif Refused </label>
                         <input type="text" class="form-control" placeholder="motif_refused"
-                            [(ngModel)]="dataRequest.motif_refused" [defaultValue]="dataRequest.motif_refused" required
+                            [(ngModel)]="dataRequest.motif_refused" [defaultValue]="dataRequest.motif_refused"
                             name="motif_refused" formControlName="motif_refused" minlength="2" maxlength="20" ngModel />
                     </div>
 
@@ -145,7 +147,7 @@
                         {{messageSuccess}}
                     </div>
 
-                    <button class="btn btn-primary">Update</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </form>
 
                 <!-- form update end here -->
