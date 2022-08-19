@@ -25,13 +25,13 @@ export class AddDemandeComponent {
     console.log(this.employeedata);
 
     this.addrequestt = new FormGroup({
-      status: new FormControl('', [Validators.required]),
+
       start_date: new FormControl('', [Validators.required]),
       end_date: new FormControl('', [Validators.required]),
       reason: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required])
       //   motif_refused: new FormControl('', [Validators.required]),
-      user_id: new FormControl('', [Validators.required])
+
 
     });
 
@@ -71,7 +71,7 @@ export class AddDemandeComponent {
 
         }, (err: HttpErrorResponse) => {
 
-         // this.messageError = "champs required or not valid"
+          // this.messageError = "champs required or not valid"
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
