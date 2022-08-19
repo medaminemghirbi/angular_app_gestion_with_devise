@@ -22,14 +22,12 @@ export class ListEmployeesComponent {
   p: any = 1;
   messageSuccess: any;
   updateemployees: FormGroup;
-  addmissionn: any;
-  clientdata: any;
-  usersService: any;
-  dataMission: any;
+
   route: any;
   submitted: boolean = false;
   messageError: any;
   admindata: any;
+  // searchemployee: FormGroup;
 
 
   constructor(private employeesServicesService: UsersServicesService, private router: Router) {
@@ -55,7 +53,35 @@ export class ListEmployeesComponent {
       phone: new FormControl('', [Validators.required]),
     });
 
+    /*
+    this.searchemployee = new FormGroup({
+      email: new FormControl('', [Validators.required])
+
+    });
+    */
+  
   }
+
+/*
+  searchEmployeeByEmail(f: any) {
+    let data = f.value
+    const formData = new FormData();
+    formData.append('email', this.updateemployees.value.email);
+
+
+    this.employeesServicesService.searchEmployeeByEmail(formData).subscribe( response => {
+
+      console.log(response)
+      this.dataArray = data
+
+    }, (err: HttpErrorResponse) => {
+      this.messageErr = "We dont't found this employee in our database"
+    })
+
+
+
+  }
+*/
 
 
   delete(id: any, i: number) {

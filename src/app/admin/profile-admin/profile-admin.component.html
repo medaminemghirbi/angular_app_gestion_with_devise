@@ -1,0 +1,125 @@
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <app-sidebar-admin></app-sidebar-admin>
+
+    <div class="content">
+
+        <app-navbar-admin></app-navbar-admin>
+
+
+        <div class="container">
+            <div class="view-account">
+                <section class="module">
+                    <div class="module-inner">
+                        <div class="side-bar">
+                            <div class="user-info">
+                                <img class="img-profile img-circle img-responsive center-block" [src]="admindata.avv"
+                                    alt="">
+                                <ul class="meta list list-unstyled">
+
+                                    <li class="email"><a> {{admindata.user.email}} </a></li>
+                                   
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="content-panel">
+
+                            <div class="form-horizontal">
+                                <fieldset class="fieldset">
+
+                                    <div class="form-group avatar">
+
+                                        <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
+
+
+                                            <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                                                <input type="file" (change)="fileChange($event)" name="avatar"
+                                                    [defaultValue]="" formControlName="avatar"
+                                                    class="file-uploader pull-left">
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-default-alt pull-left">Update
+                                                    Image</button>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    &nbsp; &nbsp;
+                                    <h2 class="title">Profile Details </h2>
+
+                                    <form [formGroup]="upadate" #f="ngForm" (ngSubmit)="updateinfouser(f)">
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control" formControlName="first_name"
+                                                    name="first_name" placeholder="firstname" [defaultValue]=""
+                                                    [(ngModel)]="admindata.user.first_name" required ngModel>
+                                            </div>
+                                        </div> <br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control" formControlName="last_name"
+                                                    name="last_name" placeholder="lastname" [defaultValue]=""
+                                                    [(ngModel)]="admindata.user.last_name" required ngModel>
+                                            </div>
+                                        </div> <br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Email </label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control"
+                                                    [defaultValue]="this.admindata.user.email" [defaultValue]=""
+                                                    formControlName="email" name="email" placeholder="email"
+                                                    [(ngModel)]="admindata.user.email" required ngModel>
+                                            </div>
+                                        </div><br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone </label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="number" class="form-control" class="form-control"
+                                                    name="phone" formControlName="phone" placeholder="phone"
+                                                    [defaultValue]="" [(ngModel)]="admindata.user.phone" required
+                                                    ngModel placeholder="+216">
+                                            </div>
+                                        </div> <br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Address </label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="text" class="form-control" [defaultValue]=""
+                                                    formControlName="address" name="address" placeholder="address"
+                                                    [(ngModel)]="admindata.user.address" required ngModel>
+                                            </div>
+                                        </div> <br>
+                                        <div class="form-group">
+                                            <label class="col-md-2 col-sm-3 col-xs-12 control-label">Password </label>
+                                            <div class="col-md-10 col-sm-9 col-xs-12">
+                                                <input type="password" class="form-control" [defaultValue]=""
+                                                    formControlName="password" name="password" placeholder="password"
+                                                    [(ngModel)]="admindata.user.password" required ngModel>
+                                            </div>
+                                        </div> <br>
+
+                                        <div class="form-group">
+                                            <div style="text-align: center;"
+                                                class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
+                                                <input class="btn btn-primary" type="submit" value="Update Profile">
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </fieldset>
+
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <br>
+    </div>
+</div>

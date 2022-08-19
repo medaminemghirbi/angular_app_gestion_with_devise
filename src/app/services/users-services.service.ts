@@ -35,9 +35,9 @@ export class UsersServicesService {
     return this.http.patch(environment.urlBackend + 'updateuser/' + id, data);
   }
 
-  
-  logout ( ): Observable<any> {
-    return this.http.delete(environment.urlBackend + 'users/sign_out/'   )
+
+  logout(): Observable<any> {
+    return this.http.delete(environment.urlBackend + 'users/sign_out/')
   }
 
 
@@ -66,9 +66,13 @@ export class UsersServicesService {
   countAllForAdmin(): Observable<any> {
     return this.http.get(environment.urlBackend + 'countall/')
   }
-  
-  getemployeedata( id : any ): Observable<any> {
-    return this.http.get(environment.urlBackend + 'getemployeedata/'  +  id )
+
+  getemployeedata(id: any): Observable<any> {
+    return this.http.get(environment.urlBackend + 'getemployeedata/' + id)
+  }
+
+  searchEmployeeByEmail (id: any): Observable<any> {
+    return this.http.get(environment.urlBackend + 'getEmployeeByEmail/' + id)
   }
 
 

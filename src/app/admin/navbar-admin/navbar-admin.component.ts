@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersServicesService } from 'src/app/services/users-services.service';
 
 @Component({
   selector: 'app-navbar-admin',
@@ -9,13 +11,23 @@ export class NavbarAdminComponent implements OnInit {
   
   admindata: any;
 
-  constructor() {
+  constructor( private usersServicesService: UsersServicesService , private router: Router  ) { 
     this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
     console.log(this.admindata)
     
    }
 
   ngOnInit(): void {
+  }
+
+
+  logout(){
+  
+    this.usersServicesService.logout();
+    console.log("log out" )
+    sessionStorage.clear() 
+    this.router.navigate(['/']);
+   
   }
 
 }
