@@ -22,7 +22,9 @@ export class LoginComponent  {
     password: '',
   }
 
-  constructor(private usersServicesService: UsersServicesService, private route: Router) { }
+  constructor(private usersServicesService: UsersServicesService, private route: Router) { 
+    sessionStorage.clear() 
+  }
 
 
   login() {

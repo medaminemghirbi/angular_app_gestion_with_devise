@@ -2,27 +2,25 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
-import { DemandesServicesService } from 'src/app/services/demandes-services.service';
 import { UsersServicesService } from 'src/app/services/users-services.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-dashboard-employee',
-  templateUrl: './dashboard-employee.component.html',
-  styleUrls: ['./dashboard-employee.component.css']
+  selector: 'app-profile-admin',
+  templateUrl: './profile-admin.component.html',
+  styleUrls: ['./profile-admin.component.css']
 })
-export class DashboardEmployeeComponent {
+export class ProfileAdminComponent {
 
-  employeedata: any;
+  admindata: any;
   imageupdate: FormGroup;
   image: any;
   upadate: FormGroup;
 
-  constructor(private employeesServicesService: UsersServicesService, private router: Router) {
+  constructor(private usersServicesService: UsersServicesService, private router: Router) {
 
-    this.employeedata = JSON.parse(sessionStorage.getItem('employeedata')!);
-    // console.log(this.employeedata.user.last_name)
+    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
+    // console.log(this.admindata.user.last_name)
 
     this.imageupdate = new FormGroup({ avatar: new FormControl('', [Validators.required]), });
 
@@ -33,8 +31,8 @@ export class DashboardEmployeeComponent {
       email: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
-      //  avatar: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
+
     });
 
 
@@ -56,13 +54,12 @@ export class DashboardEmployeeComponent {
       confirmButtonText: 'Save',
       denyButtonText: `Don't save`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
 
-        this.employeesServicesService.updateimageuser(this.employeedata.user.id, imageformadata).subscribe(response => {
+        this.usersServicesService.updateimageuser(this.admindata.user.id, imageformadata).subscribe(response => {
 
 
-          sessionStorage.setItem('employeedata', JSON.stringify(response));
+          sessionStorage.setItem('admindata', JSON.stringify(response));
           window.location.reload();
 
 
@@ -70,7 +67,7 @@ export class DashboardEmployeeComponent {
           console.log(err.message)
 
         })
-        //   this.route.navigate(['/dashbord-freelancer']);
+
         Swal.fire('Saved!', '', 'success')
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')
@@ -84,7 +81,7 @@ export class DashboardEmployeeComponent {
   updateinfouser(f: any) {
     let data = f.value
     const formData = new FormData();
-
+    //formData.append('avatar', this.image );
     formData.append('first_name', this.upadate.value.first_name);
     formData.append('last_name', this.upadate.value.last_name);
     formData.append('email', this.upadate.value.email);
@@ -92,6 +89,7 @@ export class DashboardEmployeeComponent {
     formData.append('phone', this.upadate.value.phone);
     formData.append('password', this.upadate.value.password);
 
+    // formData.append('password_confirmation', this.upadate.value.password_confirmation);
     Swal.fire({
       title: 'Do you want to save the changes?',
       showDenyButton: true,
@@ -99,22 +97,22 @@ export class DashboardEmployeeComponent {
       confirmButtonText: 'Save',
       denyButtonText: `Don't save`,
     }).then((result) => {
-
+      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.employeesServicesService.updateinfouser(this.employeedata.id, formData).subscribe(response => {
+        this.usersServicesService.updateinfouser(this.admindata.id, formData).subscribe(response => {
 
-          sessionStorage.setItem('employeedata', JSON.stringify(response));
+          sessionStorage.setItem('admindata', JSON.stringify(response));
           window.location.reload();
-        //  this.router.navigate(['/dashboard-employee'])
+          //  this.router.navigate(['/dashboard-employee'])
 
           console.log(response)
-          let indexId = this.employeedata.findIndex((obj: any) => obj.id == this.employeedata.id)
+          let indexId = this.admindata.findIndex((obj: any) => obj.id == this.admindata.id)
 
-          this.employeedata[indexId].email = data.email
-          this.employeedata[indexId].first_name = data.first_name
-          this.employeedata[indexId].last_name = data.last_name
-          this.employeedata[indexId].address = data.address
-          this.employeedata[indexId].phone = data.phone
+          this.admindata[indexId].email = data.email
+          this.admindata[indexId].first_name = data.first_name
+          this.admindata[indexId].last_name = data.last_name
+          this.admindata[indexId].address = data.address
+          this.admindata[indexId].phone = data.phone
 
         }, (err: HttpErrorResponse) => {
           console.log(err.message)
@@ -128,6 +126,4 @@ export class DashboardEmployeeComponent {
     })
 
   }
-
-
 }

@@ -36,6 +36,7 @@ import { ContactComponent } from './contact/contact.component';
 import { TestComponent } from './test/test.component';
 import { Test2Component } from './test2/test2.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ContactComponent,
     TestComponent,
     Test2Component,
+    ProfileAdminComponent,
 
 
   ],

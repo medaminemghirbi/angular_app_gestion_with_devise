@@ -51,7 +51,7 @@ export class AddDemandeComponent {
 
     console.log(data)
 
-    this.date = moment(Date.now()).format("DD/MM/YYYY");
+    this.date = moment(Date.now()).format("YYYY-MM-DD");
     if (data.start_date > this.date) {
 
       if (data.start_date <= data.end_date) {

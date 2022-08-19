@@ -20,6 +20,7 @@ import { RequestsRefusedComponent } from './admin/requests-refused/requests-refu
 import { GenerateRequestComponent } from './employee/generate-request/generate-request.component';
 import { ContactComponent } from './contact/contact.component';
 import { TestComponent } from './test/test.component';
+import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.component';
 
 
 const routes: Routes = [
@@ -29,8 +30,8 @@ const routes: Routes = [
 
   { path: 'contact', component: ContactComponent },
 
-//  { path: 'forgot-password', component: ForgotPasswordComponent },
- // { path: 'reset-password/:token', component: ResetPasswordComponent },
+  //  { path: 'forgot-password', component: ForgotPasswordComponent },
+  // { path: 'reset-password/:token', component: ResetPasswordComponent },
 
   { path: 'test', component: TestComponent },
 
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'requests-inprogress', canActivate: [AuthGuardGuard], component: RequestsInprogressComponent },
   { path: 'requests-refused', canActivate: [AuthGuardGuard], component: RequestsRefusedComponent },
   { path: 'generaterequestemployee/:id', canActivate: [AuthGuardGuard], component: GenerateRequestComponent },
+  { path: 'profile-admin', canActivate: [AuthGuardGuard], component: ProfileAdminComponent },
 
   /************************* EMPLOYEE ******************************/
   { path: 'dashboard-employee', canActivate: [AuthGuardGuard], component: DashboardEmployeeComponent },
