@@ -7,7 +7,7 @@ import { UsersServicesService } from 'src/app/services/users-services.service';
   templateUrl: './navbar-admin.component.html',
   styleUrls: ['./navbar-admin.component.css']
 })
-export class NavbarAdminComponent implements OnInit {
+export class NavbarAdminComponent  {
   
   admindata: any;
 
@@ -17,8 +17,7 @@ export class NavbarAdminComponent implements OnInit {
     
    }
 
-  ngOnInit(): void {
-  }
+
 
 
   logout(){

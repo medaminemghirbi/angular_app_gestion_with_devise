@@ -13,16 +13,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-demande.component.css']
 })
 export class AddDemandeComponent {
-  messageError: any;
-  messageErr: any;
+
   dataArray: any;
+
   employeedata: any;
+
   addrequestt: FormGroup;
+
   date: any;
 
   constructor(private demandesServicesService: DemandesServicesService, private router: Router) {
+
     this.employeedata = JSON.parse(sessionStorage.getItem('employeedata')!);
-    console.log(this.employeedata);
+    console.log(this.employeedata.id);
 
     this.addrequestt = new FormGroup({
 
@@ -30,7 +33,6 @@ export class AddDemandeComponent {
       end_date: new FormControl('', [Validators.required]),
       reason: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required])
-      //   motif_refused: new FormControl('', [Validators.required]),
 
 
     });
@@ -44,7 +46,6 @@ export class AddDemandeComponent {
     formData.append('end_date', this.addrequestt.value.end_date);
     formData.append('reason', this.addrequestt.value.reason);
     formData.append('description', this.addrequestt.value.description);
-    //  formData.append('motif_refused', '');
     formData.append('user_id', this.employeedata.id);
 
     let data = f.value
@@ -66,12 +67,11 @@ export class AddDemandeComponent {
             showConfirmButton: true,
             timer: 1500
           })
-          // window.location.reload();
+
           this.router.navigate(['/employee-list-requests'])
 
         }, (err: HttpErrorResponse) => {
 
-          // this.messageError = "champs required or not valid"
           Swal.fire({
             icon: 'error',
             title: 'Oops...',

@@ -105,8 +105,7 @@ export class DashboardEmployeeComponent {
 
           sessionStorage.setItem('employeedata', JSON.stringify(response));
           window.location.reload();
-        //  this.router.navigate(['/dashboard-employee'])
-
+       
           console.log(response)
           let indexId = this.employeedata.findIndex((obj: any) => obj.id == this.employeedata.id)
 

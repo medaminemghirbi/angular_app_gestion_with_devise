@@ -15,9 +15,12 @@
                                 <img class="img-profile img-circle img-responsive center-block" [src]="employeedata.avv"
                                     alt="">
                                 <ul class="meta list list-unstyled">
-                                   
+
                                     <li class="email"><a> {{employeedata.user.email}} </a></li>
-                                    <h6>  You still have  {{employeedata.user.solde}} Days !! </h6>
+                                    <h6> You have balance : <br>
+                                       <p class="btn btn-success rounded-pill m-2"  *ngIf="employeedata.user.solde > 0 " >  {{employeedata.user.solde}} Days !! </p> 
+                                       <p class="btn btn-danger rounded-pill m-2"  *ngIf="employeedata.user.solde < 0 " >  {{employeedata.user.solde}} Days !! </p> 
+                                    </h6>
                                 </ul>
                             </div>
 
@@ -77,11 +80,10 @@
                                         <div class="form-group">
                                             <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phone </label>
                                             <div class="col-md-10 col-sm-9 col-xs-12">
-                                                <input type="number"  class="form-control" class="form-control"
+                                                <input type="number" class="form-control" class="form-control"
                                                     name="phone" formControlName="phone" placeholder="phone"
-                                                    [defaultValue]=""
-                                                    [(ngModel)]="employeedata.user.phone" required ngModel
-                                                    placeholder="+216">
+                                                    [defaultValue]="" [(ngModel)]="employeedata.user.phone" required
+                                                    ngModel placeholder="+216">
                                             </div>
                                         </div> <br>
                                         <div class="form-group">

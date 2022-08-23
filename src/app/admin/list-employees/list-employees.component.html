@@ -87,14 +87,14 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Solde </h5>
-
-            </div>
+          <br>
             <div class="modal-body" style="text-align:center ;">
-                <h5> {{dataEmployee.email}} </h5>
-                <p> still have : {{dataEmployee.solde}} Days !! </p>
-
+                <h6> {{dataEmployee.email}} </h6>
+               <h6>  Balance :     <p class="btn btn-success rounded-pill m-2"  *ngIf="dataEmployee.solde > 0 " >  {{dataEmployee.solde}} Days !! </p> 
+                <p class="btn btn-danger rounded-pill m-2"  *ngIf="dataEmployee.solde < 0 " >  {{dataEmployee.solde}} Days !! </p> 
+             
+            </h6> 
+              
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,9 +113,9 @@
 
             </div>
             <div class="modal-body">
-                <!-- form update start here -->
+  
                 <form [formGroup]="updateemployees" #f="ngForm" (ngSubmit)="updateemployee(f)">
-                    <!-- firstName validation start here -->
+                  
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Email </label>
                         <input type="text" class="form-control" placeholder="email" [(ngModel)]="dataEmployee.email"
@@ -156,10 +156,6 @@
                     </div>
 
                     <br>
-
-                    <div class="alert alert-success" *ngIf="messageSuccess">
-                        {{messageSuccess}}
-                    </div>
 
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>

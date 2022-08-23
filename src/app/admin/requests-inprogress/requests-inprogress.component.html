@@ -25,8 +25,8 @@
                                 <th scope="col">End date </th>
 
                                 <th scope="col">Reason </th>
-                                <th scope="col">Motif Refused </th>
-                                <th scope="col">Sending date </th>
+                                <th scope="col">Balance </th>
+                               
                                 <th colspan="2">Actions</th>
                             </tr>
                         </thead>
@@ -40,8 +40,13 @@
 
 
                                 <td>{{item.reason }} </td>
-                                <td>{{item.motif_refused }} </td>
-                                <td>{{item.created_at | date:'medium' }} </td>
+                                <td>
+                                    <p class="btn btn-outline-success rounded-pill m-1" *ngIf="item.user.solde > 0 ">
+                                        {{item.user.solde}} Days</p>
+                                    <p class="btn btn-outline-danger rounded-pill m-1" *ngIf="item.user.solde < 0 ">
+                                        {{item.user.solde}} Days</p>
+
+                                </td>
 
                                 <td> <button data-toggle="modal" data-target="#exampleModal" type="button"
                                         (click)="getdata(item.status , item.start_date , item.end_date , item.reason, item.motif_refused , item.user.id ,item.id)"
@@ -69,27 +74,6 @@
         </div>
     </div>
 
-</div>
-
-
-<!-- Modal Solde -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Solde </h5>
-
-            </div>
-            <div class="modal-body">
-                his leave balance is : !! days/months
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Modal Update -->
@@ -134,10 +118,7 @@
 
                     <br>
 
-                    <div class="alert alert-success" *ngIf="messageSuccess">
-                        {{messageSuccess}}
-                    </div>
-
+                
                     <button class="btn btn-primary">Update</button>
                 </form>
 

@@ -10,7 +10,7 @@ import { AddEmployeeComponent } from './admin/add-employee/add-employee.componen
 import { ListDemandesComponent } from './admin/list-demandes/list-demandes.component';
 import { DashboardEmployeeComponent } from './employee/dashboard-employee/dashboard-employee.component';
 import { AddDemandeComponent } from './employee/add-demande/add-demande.component';
-import { UpdateProfileComponent } from './employee/update-profile/update-profile.component';
+
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -34,9 +34,17 @@ import { RequestsRefusedComponent } from './admin/requests-refused/requests-refu
 import { GenerateRequestComponent } from './employee/generate-request/generate-request.component';
 import { ContactComponent } from './contact/contact.component';
 import { TestComponent } from './test/test.component';
-import { Test2Component } from './test2/test2.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.component';
+
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 
 @NgModule({
@@ -49,7 +57,6 @@ import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.compo
     ListDemandesComponent,
     DashboardEmployeeComponent,
     AddDemandeComponent,
-    UpdateProfileComponent,
     LoginComponent,
     RegisterComponent,
     ListEmployeesComponent,
@@ -64,7 +71,6 @@ import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.compo
     GenerateRequestComponent,
     ContactComponent,
     TestComponent,
-    Test2Component,
     ProfileAdminComponent,
 
 
@@ -82,7 +88,9 @@ import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.compo
 
     ChartsModule,
 
-    Ng2SearchPipeModule 
+    Ng2SearchPipeModule ,
+
+    FullCalendarModule // register FullCalendar with you app
 
 
   ],

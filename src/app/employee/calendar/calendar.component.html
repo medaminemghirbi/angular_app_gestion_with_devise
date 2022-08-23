@@ -1,0 +1,23 @@
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <app-sidebar></app-sidebar>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <div class="content">
+
+        <br><br>
+
+        <div class="calendar">
+
+            <button  class="btn btn-success rounded-pill m-2"  (click)="toggleWeekends()">toggle weekends</button>
+
+            <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+
+
+        </div>
+    </div>
+
+
+
+
+</div>
