@@ -68,6 +68,7 @@ export class EmployeeListRequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.demandesServicesService.getRequestsByID(this.employeedata.id).subscribe(data => {
 
       sessionStorage.setItem('requestdetails', JSON.stringify(data));
@@ -197,5 +198,5 @@ export class EmployeeListRequestsComponent implements OnInit {
 
   }
 
- 
+
 }

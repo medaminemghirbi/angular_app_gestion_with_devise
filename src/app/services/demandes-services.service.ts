@@ -32,6 +32,10 @@ export class DemandesServicesService {
     return this.http.get(environment.urlBackend + 'getrequestdata/' + id)
   }
 
+  getRequestsByIDAccepted(user_id: any): Observable<any> {
+    return this.http.get(environment.urlBackend + 'getRequestsByIdAccepted/' + user_id)
+  }
+
   /************************************************FOR ADMIN ******************************************************/
 
   getAllRequests(): Observable<any> {
