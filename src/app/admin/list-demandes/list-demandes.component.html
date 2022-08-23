@@ -5,7 +5,6 @@
         <app-navbar-admin></app-navbar-admin>
 
 
-        <!-- Recent Sales Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
@@ -24,13 +23,14 @@
                                 <th scope="col">Start date </th>
                                 <th scope="col">End date </th>
                                 <th scope="col">Period </th>
-                                <th scope="col">Solde </th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Reason </th>
-                                <th scope="col">Motif Refused </th>
 
-                                <th scope="col">Sending date </th>
-                                <th colspan="2">Actions</th>
+                                <th scope="col">Balance </th>
+
+
+                                <th scope="col">Status</th>
+
+
+                                <th colspan="3">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,8 +40,18 @@
                                 <td> {{item.user.email}} </td>
                                 <td>{{item.start_date}} </td>
                                 <td>{{item.end_date}} </td>
+
                                 <td>{{item.days }} Days</td>
-                                <td>{{item.user.solde }} Days</td>
+
+
+                                <td>
+                                    <p class="btn btn-outline-success rounded-pill m-1" *ngIf="item.user.solde > 0 ">
+                                        {{item.user.solde}} Days</p>
+                                    <p class="btn btn-outline-danger rounded-pill m-1" *ngIf="item.user.solde < 0 ">
+                                        {{item.user.solde}} Days</p>
+
+                                </td>
+
                                 <td *ngIf="item.status == 'in_progress' "><button type="button"
                                         class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
                                 <td *ngIf="item.status == 'accepted' "><button type="button"
@@ -49,11 +59,17 @@
                                 <td *ngIf="item.status == 'refused' "><button type="button"
                                         class="btn btn-danger rounded-pill m-2">Refused</button></td>
 
-                                <td>{{item.reason }} </td>
-                                <td>{{item.motif_refused }} </td>
 
-                                <td>{{item.created_at | date:'medium' }} </td>
 
+                                <td>
+                                    <button
+                                        (click)="getdata1(item.status , item.motif_refused , item.user_id , item.created_at , item.reason , item.description, item.id)"
+                                        data-toggle="modal" data-target="#exampleModal1"
+                                        class="btn btn-square btn-outline-info"><i class="fa fa-info"
+                                            aria-hidden="true"></i>
+                                    </button>
+
+                                </td>
                                 <td>
                                     <button *ngIf="item.status==='in_progress' || item.status==='refused'   "
                                         (click)="getdata(item.status , item.motif_refused , item.user_id , item.id)"
@@ -87,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <!-- Recent Sales End -->
+
 
         <div style="margin-left: 60%;">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -95,6 +111,75 @@
     </div>
 
 </div>
+
+
+<!-- Modal Details -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+            </div>
+            <div class="modal-body">
+
+                <form>
+
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> User ID </label>
+                        <input type="text" class="form-control" placeholder="user_id"
+                            [defaultValue]="dataRequest.user_id" required name="user_id" readonly />
+                    </div>
+                    <br>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> Status </label>
+                        <input type="text" class="form-control" placeholder="status" [defaultValue]="dataRequest.status"
+                            name="status" readonly />
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> Reason </label>
+                        <input type="text" class="form-control" placeholder="reason" [defaultValue]="dataRequest.reason"
+                            name="reason" readonly />
+                    </div>
+
+                    <br>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> Description </label>
+                        <textarea type="text" class="form-control" placeholder="description"
+                            [defaultValue]="dataRequest.description" name="description" readonly> </textarea>
+
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> Motif Refused </label>
+                        <textarea type="text" class="form-control" placeholder="motif_refused"
+                            [defaultValue]="dataRequest.motif_refused" name="motif_refused" readonly> </textarea>
+                    </div>
+
+                    <br>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1"> Sending Date </label>
+                        <input type="text" class="form-control" placeholder="created_at"
+                            [defaultValue]="dataRequest.created_at" name="created_at" readonly />
+                    </div>
+
+                    <br>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Modal Update -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,9 +225,6 @@
 
                     <br>
 
-                    <div class="alert alert-success" *ngIf="messageSuccess">
-                        {{messageSuccess}}
-                    </div>
 
                     <button class="btn btn-primary" type="submit">Update</button>
                 </form>

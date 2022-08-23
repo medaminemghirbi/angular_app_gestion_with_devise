@@ -23,9 +23,9 @@
                                 <th scope="col">Email </th>
                                 <th scope="col">Start date </th>
                                 <th scope="col">End date </th>
-
+                                
                                 <th scope="col">Reason </th>
-                                <th scope="col">Motif Refused </th>
+                                <th scope="col">Balance </th>
                                 <th scope="col">Sending date </th>
 
                             </tr>
@@ -37,17 +37,16 @@
                                 <td> {{item.user.email}} </td>
                                 <td>{{item.start_date}} </td>
                                 <td>{{item.end_date}} </td>
+                                <td>
+                                    <p class="btn btn-outline-success rounded-pill m-1" *ngIf="item.user.solde > 0 ">
+                                        {{item.user.solde}} Days</p>
+                                    <p class="btn btn-outline-danger rounded-pill m-1" *ngIf="item.user.solde < 0 ">
+                                        {{item.user.solde}} Days</p>
 
-
+                                </td>
                                 <td>{{item.reason }} </td>
-                                <td>{{item.motif_refused }} </td>
+
                                 <td>{{item.created_at | date:'medium' }} </td>
-
-
-
-
-
-
 
 
 
@@ -68,80 +67,4 @@
         </div>
     </div>
 
-</div>
-
-
-<!-- Modal Solde -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Solde </h5>
-
-            </div>
-            <div class="modal-body">
-                his leave balance is : !! days/months
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Update -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
-            </div>
-            <div class="modal-body">
-                <!-- form update start here -->
-                <form [formGroup]="updaterequests" #f="ngForm" (ngSubmit)="updaterequest(f)">
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1"> User ID </label>
-                        <input type="text" class="form-control" placeholder="user_id"
-                            [defaultValue]="dataRequest.user_id" required name="user_id" formControlName="user_id"
-                            [(ngModel)]="dataRequest.user_id" minlength="2" maxlength="20" ngModel readonly />
-                    </div>
-                    <br>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Status </label>
-
-                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="dataRequest.status"
-                            required formControlName="status" name="status">
-                            <option value="in_progress">In progress </option>
-                            <option value="accepted">accepted </option>
-                            <option value="refused">refused </option>
-                        </select>
-
-                    </div>
-
-                    <br>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1"> Motif Refused </label>
-                        <input type="text" class="form-control" placeholder="motif_refused"
-                            [defaultValue]="dataRequest.motif_refused" required name="motif_refused"
-                            formControlName="motif_refused" minlength="2" maxlength="20" ngModel />
-                    </div>
-
-                    <br>
-
-                    <div class="alert alert-success" *ngIf="messageSuccess">
-                        {{messageSuccess}}
-                    </div>
-
-                    <button class="btn btn-primary">Update</button>
-                </form>
-
-                <!-- form update end here -->
-            </div>
-        </div>
-    </div>
 </div>

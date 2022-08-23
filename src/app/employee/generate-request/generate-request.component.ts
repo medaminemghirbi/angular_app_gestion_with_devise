@@ -73,7 +73,7 @@ export class GenerateRequestComponent {
             [
              
               { text: "Email : " + this.employeedata.user.email },
-              { text: "Solde : " + this.employeedata.user.solde },
+              { text: "Balance (Days) : " + this.employeedata.user.solde },
             
             ],
             [

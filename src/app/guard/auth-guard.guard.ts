@@ -10,7 +10,7 @@ export class AuthGuardGuard implements CanActivate {
   admindata: any = null
   employeedata: any = null
 
-  constructor( private router: Router) { }
+  constructor(private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -18,7 +18,7 @@ export class AuthGuardGuard implements CanActivate {
     this.admindata = sessionStorage.getItem('admindata');
     this.employeedata = sessionStorage.getItem('employeedata');
 
-    if ( this.admindata != null || this.employeedata != null )
+    if (this.admindata != null || this.employeedata != null)
       return true;
     else
       this.router.navigate(['/']);

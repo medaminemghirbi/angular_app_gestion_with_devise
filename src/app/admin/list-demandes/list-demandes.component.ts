@@ -20,40 +20,31 @@ export class ListDemandesComponent {
   messageErr: any;
   searchedKeyword: any;
   p: any = 1;
-  messageSuccess: any;
-  updateemployees: any;
-  usersService: any;
-  submitted: boolean = false;
-  route: any;
-  messageError: any;
+
   updaterequests: FormGroup;
-  admindata: any;
-  docDefinition: any
+
   requestdetails: any;
-  freelancerdata: any;
+
 
   constructor(private demandesServicesService: DemandesServicesService, private router: Router) {
 
-    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
-    console.log(this.admindata)
-
-    this.requestdetails = JSON.parse(sessionStorage.getItem('requestdetails')!);
-
     this.demandesServicesService.getAllRequests().subscribe(data => {
-      // debugger
-      sessionStorage.setItem('requestdetails', JSON.stringify(data));
 
       console.log(data)
       this.dataArray = data
-        , (err: HttpErrorResponse) => {
-          this.messageErr = "We dont't found this demande in our database"
-        }
+
+      sessionStorage.setItem('requestdetails', JSON.stringify(data)), (err: HttpErrorResponse) => {
+        this.messageErr = "We dont't found this request in our database"
+      }
     })
 
+    this.requestdetails = JSON.parse(sessionStorage.getItem('requestdetails')!);
+
+    
     this.updaterequests = new FormGroup({
       status: new FormControl('', [Validators.required]),
-      motif_refused: new FormControl('', [Validators.required]) ,
-      user_id : new FormControl('', [Validators.required]) ,
+      motif_refused: new FormControl('', [Validators.required]),
+      user_id: new FormControl('', [Validators.required]),
     });
 
   }
@@ -92,12 +83,31 @@ export class ListDemandesComponent {
   dataRequest = {
     id: '',
     status: '',
-    motif_refused: '' ,
-    user_id : ''
+    motif_refused: '',
+    user_id: '',
+    created_at: '',
+    reason: '',
+    description: ''
   }
 
-  getdata(status: string, motif_refused: any , user_id :any , id: any) {
-    this.messageSuccess = ''
+  getdata1(status: string, motif_refused: any, user_id: any, created_at: any, reason: any, description: any, id: any) {
+
+    this.dataRequest.status = status
+    this.dataRequest.user_id = user_id
+
+    this.dataRequest.description = description
+    this.dataRequest.motif_refused = motif_refused
+    this.dataRequest.created_at = created_at
+    this.dataRequest.reason = reason
+    this.dataRequest.id = id
+
+
+    console.log(this.dataRequest)
+
+  }
+
+  getdata(status: string, motif_refused: any, user_id: any, id: any) {
+
     this.dataRequest.status = status
     this.dataRequest.user_id = user_id
 
@@ -115,7 +125,7 @@ export class ListDemandesComponent {
     const formData = new FormData();
     formData.append('status', this.updaterequests.value.status);
     formData.append('motif_refused', this.updaterequests.value.motif_refused);
-    formData.append('user_id', this.updaterequests.value.user_id); 
+    formData.append('user_id', this.updaterequests.value.user_id);
 
     this.demandesServicesService.updateRequest(this.dataRequest.id, data).subscribe((response: any) => {
 
@@ -128,7 +138,7 @@ export class ListDemandesComponent {
 
     }, (err: HttpErrorResponse) => {
       console.log(err.message)
-      this.messageError = "champs required or not valid !"
+
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

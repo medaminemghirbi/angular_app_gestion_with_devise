@@ -41,12 +41,12 @@ export class UsersServicesService {
   }
 
 
-  /************************************************ ADMIN  **************************************************************/
+  /************************************************FOR ADMIN ******************************************************/
+
   registerAdmin(data: any): Observable<any> {
     return this.http.post(environment.urlBackend + 'users/', data)
   }
 
-  /************************************************FOR ADMIN ******************************************************/
   registerEmployee(data: any): Observable<any> {
     return this.http.post(environment.urlBackend + 'createEmployee/', data)
   }
@@ -71,7 +71,7 @@ export class UsersServicesService {
     return this.http.get(environment.urlBackend + 'getemployeedata/' + id)
   }
 
-  searchEmployeeByEmail (id: any): Observable<any> {
+  searchEmployeeByEmail(id: any): Observable<any> {
     return this.http.get(environment.urlBackend + 'getEmployeeByEmail/' + id)
   }
 

@@ -20,7 +20,6 @@ export class ProfileAdminComponent {
   constructor(private usersServicesService: UsersServicesService, private router: Router) {
 
     this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
-    // console.log(this.admindata.user.last_name)
 
     this.imageupdate = new FormGroup({ avatar: new FormControl('', [Validators.required]), });
 

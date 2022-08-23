@@ -11,7 +11,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-user fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2"  routerLink="/list-employees"  >Employees <br><br></p>
+                            <p class="mb-2" routerLink="/list-employees">Employees <br><br></p>
                             <h6 class="mb-0"> {{dataArrayy.data[0]}} </h6>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-line fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2"  routerLink="/requests-inprogress"  >Requests In Progress</p>
+                            <p class="mb-2" routerLink="/requests-inprogress">Requests In Progress</p>
                             <h6 class="mb-0">{{dataArrayy.data[1]}} </h6>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-bar fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2"  routerLink="/requests-accepted" >Requests Accepted </p>
+                            <p class="mb-2" routerLink="/requests-accepted">Requests Accepted </p>
                             <h6 class="mb-0">{{dataArrayy.data[2]}} </h6>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-area fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2" routerLink="/requests-refused"  >Requests Refused</p>
+                            <p class="mb-2" routerLink="/requests-refused">Requests Refused</p>
                             <h6 class="mb-0">{{dataArrayy.data[3]}}</h6>
                         </div>
                     </div>
@@ -69,11 +69,11 @@
                                 <th scope="col">Start date </th>
                                 <th scope="col">End date </th>
                                 <th scope="col">Period </th>
-                                <th scope="col">Solde </th>
-
-                                <th scope="col">Status</th>
+                                <th scope="col">Balance </th>
                                 <th scope="col">Reason </th>
 
+
+                                <th scope="col">Status</th>
 
 
                             </tr>
@@ -86,9 +86,17 @@
                                 <td>{{item.start_date}} </td>
                                 <td>{{item.end_date}} </td>
 
-                                <td> {{item.days }} Days !!</td>
+                                <td> {{item.days }} Days</td>
 
-                                <td> {{ item.user.solde }} Days !! </td>
+                                <td>
+                                    <p class="btn btn-outline-success m-2" *ngIf="item.user.solde > 0 ">
+                                        {{item.user.solde}} Days</p>
+                                    <p class="btn btn-outline-danger m-2" *ngIf="item.user.solde < 0 ">
+                                        {{item.user.solde}} Days</p>
+
+                                </td>
+                                <td>{{item.reason}} </td>
+
 
                                 <td *ngIf="item.status == 'in_progress' "><button type="button"
                                         class="btn btn-primary rounded-pill m-2">In_Progress</button></td>
@@ -96,8 +104,6 @@
                                         class="btn btn-success rounded-pill m-2">Accepted</button></td>
                                 <td *ngIf="item.status == 'refused' "><button type="button"
                                         class="btn btn-danger rounded-pill m-2">Refused</button></td>
-
-                                <td>{{item.reason}} </td>
 
 
 

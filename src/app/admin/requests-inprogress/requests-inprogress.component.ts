@@ -15,25 +15,19 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
   styleUrls: ['./requests-inprogress.component.css']
 })
 export class RequestsInprogressComponent {
-
-  admindata: any;
  
   dataArray: any;
+
   messageErr: any;
+
   updaterequests: FormGroup;
+
   searchedKeyword: any ;
-  messageSuccess: any;
-  messageError: any;
-  submitted: boolean = false;
+
   p : any = 1 ;
-  docDefinition: any ;
+
 
   constructor(private demandesServicesService:DemandesServicesService,private router:Router) {
-
-    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
-    console.log(this.admindata)
-    
-   
     
     this.demandesServicesService.getrequestinprogressbyemployee().subscribe(data=>{
       // debugger
@@ -98,9 +92,9 @@ export class RequestsInprogressComponent {
   }
 
   getdata(status: string,  start_date: string, end_date: string, reason: string , motif_refused:any, user_id :any , id: any) {
-    this.messageSuccess = ''
+ 
     this.dataRequest.status = status
-   // this.dataRequest.password = password
+
     this.dataRequest.start_date = start_date
     this.dataRequest.end_date = end_date
     this.dataRequest.reason = reason
@@ -116,11 +110,7 @@ export class RequestsInprogressComponent {
     let data = f.value
     const formData = new FormData();
     formData.append('status', this.updaterequests.value.status);
-    // formData.append('password', this.updaterequests.value.password);
-   // formData.append('start_date', this.updaterequests.value.start_date);
-   // formData.append('end_date', this.updaterequests.value.end_date);
 
-   // formData.append('reason', this.updaterequests.value.reason);
     formData.append('motif_refused', this.updaterequests.value.motif_refused);
     formData.append('user_id', this.updaterequests.value.user_id);
 
@@ -135,7 +125,7 @@ export class RequestsInprogressComponent {
 
     }, (err: HttpErrorResponse) => {
       console.log(err.message)
-      this.messageError = "champs required or not valid !"
+  
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

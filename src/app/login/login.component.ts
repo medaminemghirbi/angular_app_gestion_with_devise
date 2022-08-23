@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { User } from '../models/user';
@@ -12,8 +12,6 @@ import { UsersServicesService } from '../services/users-services.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent  {
-
-  public connecte: boolean = false;
 
   messageError: any
 
@@ -40,11 +38,7 @@ export class LoginComponent  {
 
     this.usersServicesService.login(data).subscribe(
       response => {
-      //  console.log(response);
-
-        //  console.log(JSON.parse(response).toString(response));
-        //   console.log(JSON.parse(JSON.stringify(response)));
-
+     
         if (response.status == 401) {
 
           Swal.fire({
@@ -91,7 +85,7 @@ export class LoginComponent  {
 
         }
 
-      }, (err: HttpErrorResponse) => this.messageError = err.error.error);
+      }, (err: HttpErrorResponse) => this.messageError = err.error.error  );
 
   }
 

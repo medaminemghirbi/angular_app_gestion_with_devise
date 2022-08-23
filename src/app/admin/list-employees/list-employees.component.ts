@@ -17,17 +17,16 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 export class ListEmployeesComponent {
 
   dataArray: any;
+  
   messageErr: any;
+
   searchedKeyword: any;
+
   p: any = 1;
-  messageSuccess: any;
+
   updateemployees: FormGroup;
 
-  route: any;
-  submitted: boolean = false;
-  messageError: any;
   admindata: any;
-  // searchemployee: FormGroup;
 
 
   constructor(private employeesServicesService: UsersServicesService, private router: Router) {
@@ -128,7 +127,7 @@ export class ListEmployeesComponent {
   }
 
   getdata(email: string, last_name: string, first_name: string, address: string, phone: any, id: any) {
-    this.messageSuccess = ''
+
     this.dataEmployee.email = email
 
     // this.dataEmployee.password = password
@@ -145,7 +144,6 @@ export class ListEmployeesComponent {
 
   getdata2(email: string, solde: number, id: any) {
 
-    this.messageSuccess = ''
     this.dataEmployee.email = email
     this.dataEmployee.solde = solde
     this.dataEmployee.id = id
@@ -175,7 +173,7 @@ export class ListEmployeesComponent {
 
     }, (err: HttpErrorResponse) => {
       console.log(err.message)
-      this.messageError = "champs required or not valid !"
+     
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

@@ -7,16 +7,14 @@ import { UsersServicesService } from 'src/app/services/users-services.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent  {
   employeedata: any;
 
-  constructor( private usersServicesService: UsersServicesService , private router: Router  ) { 
+  constructor( private usersServicesService: UsersServicesService , private router: Router  ) {
+
     this.employeedata = JSON.parse(sessionStorage.getItem('employeedata')!);
     console.log(this.employeedata.id)
     
-  }
-
-  ngOnInit(): void {
   }
 
   logout(){
