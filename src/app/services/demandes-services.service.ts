@@ -17,7 +17,7 @@ export class DemandesServicesService {
   /************************************************FOR EMPLOYEE ******************************************************/
 
   addRequest(data: any): Observable<any> {
-    return this.http.post(environment.urlBackend + 'requests/', data)
+    return this.http.post(environment.urlBackend + 'addRequest/', data)
   }
 
   getRequestsByID(user_id: any): Observable<any> {
