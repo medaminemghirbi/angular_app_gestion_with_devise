@@ -23,7 +23,7 @@ export class UsersServicesService {
   }
 
   sendResetLink(email: any) {
-    return this.http.post(environment.urlBackend + 'password/forgot/', email);
+    return this.http.post(environment.urlBackend + 'password_resets/', email);
   }
 
 
